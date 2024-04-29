@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     'nuxt-headlessui',
     '@nuxt/content',
-    'nuxt-yandex-metrika',
+    'yandex-metrika-module-nuxt3',
   ],
 
   runtimeConfig: {
@@ -46,16 +46,11 @@ export default defineNuxtConfig({
   },
 
   yandexMetrika: {
-    id: '96933775',
-    delay: 0,
-    options: {
-      defer: true,
-      clickmap: true,
-      trackLinks: true,
-      accurateTrackBounce: true,
-      webvisor: true,
-    },
-    debug: process.env.NODE_ENV !== 'production',
+    id: process.env.YANDEX_METRICA_ID,
+    clickmap: true,
+    trackLinks: true,
+    accurateTrackBounce: true,
+    webvisor: true,
   },
 
   experimental: {

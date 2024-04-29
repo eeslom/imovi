@@ -9,6 +9,21 @@ if (!page.value)
   throw createError({ statusCode: 404, statusMessage: 'Article not found', fatal: true })
 
 console.log(page.value)
+
+useSeoMeta({
+  title: page.value.head?.title || page.value.title,
+  description: page.value.head?.description || page.value.description,
+})
+
+const title = page.value.head?.title || page.value.title
+const description = page.value.head?.description || page.value.description
+useSeoMeta({
+  titleTemplate: '%s · Imovi',
+  title,
+  description,
+  ogDescription: description,
+  ogTitle: `${title} · Imovi`,
+})
 </script>
 
 <template>
@@ -16,7 +31,7 @@ console.log(page.value)
     <LazyContentDoc>
       <template #not-found>
         <h2 text-center>
-          ({{ route.params.slug }}) nomli sahifa topilmadi
+          awd
         </h2>
       </template>
     </LazyContentDoc>
