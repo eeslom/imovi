@@ -12,7 +12,8 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     'nuxt-headlessui',
     '@nuxt/content',
-    'yandex-metrika-module-nuxt3',
+    '@nuxt/image',
+    '@nuxtjs/sitemap',
   ],
 
   runtimeConfig: {
@@ -21,36 +22,18 @@ export default defineNuxtConfig({
     },
   },
 
-  content: {
-    highlight: {
-      theme: {
-        default: 'material-theme-lighter',
-        dark: 'material-theme-palenight',
-      },
-      langs: ['js', 'ts', 'vue', 'css', 'scss', 'sass', 'html', 'bash', 'md', 'mdc', 'json'],
-    },
-  },
-
   supabase: {
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_KEY,
     redirect: false,
     redirectOptions: {
-      login: '/login',
-      callback: '/confirm',
+      login: '/user/login',
+      callback: '/user/confirm',
     },
   },
 
   headlessui: {
     prefix: 'Headless',
-  },
-
-  yandexMetrika: {
-    id: process.env.YANDEX_METRICA_ID,
-    clickmap: true,
-    trackLinks: true,
-    accurateTrackBounce: true,
-    webvisor: true,
   },
 
   experimental: {
@@ -65,6 +48,16 @@ export default defineNuxtConfig({
     '@unocss/reset/tailwind.css',
   ],
 
+  content: {
+    highlight: {
+      theme: {
+        default: 'vitesse-light',
+        dark: 'vitesse-dark',
+      },
+      langs: ['js', 'ts', 'vue', 'css', 'scss', 'sass', 'html', 'bash', 'md', 'mdc', 'json'],
+    },
+  },
+
   nitro: {
     esbuild: {
       options: {
@@ -74,7 +67,7 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: false,
       routes: ['/'],
-      ignore: ['/page/**'],
+      ignore: ['/page/**', '/page/*'],
     },
   },
 

@@ -1,15 +1,5 @@
 <script setup lang="ts">
-// const supabase = useSupabaseClient()
-
 // const { data: items } = await useAsyncData('movies', () => $fetch('/api/movies'))
-
-async function getMe() {
-  const data = await $fetch('/api/me')
-
-  console.log(data)
-}
-
-onMounted(getMe)
 </script>
 
 <template>

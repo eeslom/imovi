@@ -20,12 +20,17 @@ const state = reactive({
 const redirectTo = `${useRuntimeConfig().public.baseUrl}/user/confirm`
 
 async function loginWithPassword() {
-  const { error } = await supabase.auth.signInWithOtp({
+  const { error, data } = await supabase.auth.signInWithPassword({
     email: state.email,
+    password: state.password,
   })
 
-  if (error)
+  if (error) {
     state.errorMsg = error.message
+    setTimeout(() => state.errorMsg = '', 3000)
+  }
+
+  console.log(data)
 }
 
 async function logInWithOAuth(provider: 'google' | 'facebook') {
@@ -80,7 +85,7 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
             leave-to="opacity-0 scale-95"
           >
             <HeadlessDialogPanel
-              max-w-md w-full transform overflow-hidden rounded-lg bg-gray-600 p-4 text-left align-middle shadow-xl transition-all
+              max-w-md w-full transform overflow-hidden rounded-lg bg-dark-gray p-4 text-left align-middle transition-all
             >
               <div w-full flex items-center justify-between>
                 <HeadlessDialogTitle
@@ -97,33 +102,28 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
               </div>
 
               <div mt-4>
-                <form class="space-y-6" @submit.prevent="loginWithPassword">
+                <form space-y-4 @submit.prevent="loginWithPassword">
                   <div>
-                    <div class="mt-1">
-                      <input type="email" placeholder="Email pochtangizni kiriting..." block w-full appearance-none border-1 border-gray-300 rounded-md px-3 py-2 text-black shadow-sm focus:border-teal-500 sm:text-sm focus:outline-none focus:ring-teal-500 placeholder-gray-400>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div class="mt-1">
-                      <input type="password" placeholder="Parolingizni kiriting..." block w-full appearance-none border-1 border-gray-300 rounded-md px-3 py-2 text-black shadow-sm focus:border-teal-500 sm:text-sm focus:outline-none focus:ring-teal-500 placeholder-gray-400>
-                    </div>
-                  </div>
-
-                  <div v-if="state.errorMsg">
                     <div mt-1>
-                      <span text-red>{{ state.errorMsg }}</span>
+                      <input v-model="state.email" type="email" autocomplete="email" placeholder="Email pochtangizni kiriting..." block w-full appearance-none border-1 border-gray-500 rounded-md bg-slate-gray px-3 py-2 text-gray-200 shadow-sm focus:border-green sm:text-sm focus:outline-none focus:ring-green placeholder-gray-400>
                     </div>
                   </div>
 
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                      <input id="remember-me" name="remember-me" type="checkbox" h-4 w-4 border-gray-300 rounded text-teal-600 focus:ring-teal-500>
-                      <label for="remember-me" class="ml-2 block text-sm text-gray-200"> Meni eslab qolish </label>
+                  <div>
+                    <div mt-1>
+                      <input v-model="state.password" type="password" placeholder="Parolingizni kiriting..." block w-full appearance-none border-1 border-gray-500 rounded-md bg-slate-gray px-3 py-2 text-gray-200 shadow-sm focus:border-green sm:text-sm focus:outline-none focus:ring-green placeholder-gray-400>
                     </div>
+                  </div>
 
-                    <div class="text-sm">
-                      <NuxtLink to="/" class="text-teal-500 font-medium hover:text-teal-600">
+                  <div v-if="state.errorMsg" text-sm text-red>
+                    {{ state.errorMsg }}
+                  </div>
+
+                  <div flex items-center justify-between>
+                    <span />
+
+                    <div text-sm>
+                      <NuxtLink to="/" text-green font-medium hover:text-dark-green>
                         Parolni unutdingizmi?
                       </NuxtLink>
                     </div>
@@ -137,20 +137,23 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                 </form>
               </div>
 
-              <div mt-2>
-                <div relative>
-                  <div absolute inset-0 flex items-center>
-                    <div w-full border-t border-gray-300 />
-                  </div>
-                  <div relative flex justify-center text-sm>
-                    <span bg-gray-600 px-2 text-gray-200> Yoki </span>
-                  </div>
+              <div relative mt-2>
+                <div absolute inset-0 flex items-center>
+                  <div w-full border-t border-gray-400 />
                 </div>
-                <div mt-2 flex items-baseline gap-2>
-                  <button w-full flex items-center justify-center rounded-lg bg-gray-100 py-2 hover:bg-gray-200 @click="logInWithOAuth('google')">
+                <div relative flex justify-center text-sm>
+                  <span bg-dark-gray px-2 text-gray-300> Yoki </span>
+                </div>
+              </div>
+
+              <div mt-2>
+                <div mt-2 flex flex-col items-baseline gap-2 sm:flex-row>
+                  <button iconic-btn title="Google orqali kirish" @click="logInWithOAuth('google')">
+                    <span sr-only>Google orqali kirish</span>
                     <div i-logos-google-icon inline-block />
                   </button>
-                  <button w-full flex items-center justify-center rounded-lg bg-gray-100 py-2 hover:bg-gray-200 @click="logInWithOAuth('facebook')">
+                  <button iconic-btn disabled title="Xozircha ushbu yo'l bilan kira olmaysiz" @click="logInWithOAuth('facebook')">
+                    <span sr-only>Facebook orqali kirish</span>
                     <div i-logos-facebook inline-block />
                   </button>
                 </div>

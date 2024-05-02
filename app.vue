@@ -4,8 +4,8 @@ import { appName } from '~/constants'
 provideHeadlessUseId(() => useId())
 
 useHead({
-  title: appName,
   htmlAttrs: { lang: 'uz' },
+  title: appName,
 })
 
 useSeoMeta({

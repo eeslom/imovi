@@ -1,18 +1,16 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
 
-const searchStore = useSearchStore()
+// const userStore = useUserStore()
 
-const navigation = ref<{ name: string, to: string, isActive: boolean }[]>([
+const navigation = ref<{ name: string, to: string }[]>([
   {
     name: 'Filmlar',
     to: '/',
-    isActive: true,
   },
   {
     name: 'Multfilmlar',
     to: '/',
-    isActive: false,
   },
 ])
 </script>
@@ -24,27 +22,24 @@ const navigation = ref<{ name: string, to: string, isActive: boolean }[]>([
         <div flex>
           <div flex flex-shrink-0 items-center>
             <NuxtLink to="/">
-              <img block h-8 w-auto object-contain src="/logo.png" alt="Imovi">
+              <NuxtImg block h-7 w-auto object-cover sm:h-8 src="/logo.png" alt="Imovi" />
             </NuxtLink>
           </div>
-          <div hidden sm:ml-6 md:flex md:space-x-8>
-            <NuxtLink v-for="item in navigation" :key="item.name.toLowerCase().split(' ').join('-')" :to="item.to" inline-flex items-center px-1 pt-1 text-sm text-gray-100 font-medium :class="[item.isActive ? 'text-green' : 'hover:text-green']">
+          <div hidden sm:ml-10 md:flex md:space-x-8>
+            <NuxtLink v-for="item in navigation" :key="item.name.toLowerCase().split(' ').join('-')" :to="item.to" inline-flex items-center px-1 pt-1 text-sm text-gray-100 font-medium hover:text-green>
               {{ item.name }}
             </NuxtLink>
           </div>
         </div>
         <div flex items-center>
-          <button icon-btn @click="searchStore.openSearch">
-            <div i-carbon-search order--1 text-xl />
-          </button>
-          <div hidden md:ml-6 md:flex md:items-center>
+          <div hidden md:ml-8 md:flex md:items-center>
             <!-- Profile dropdown -->
             <HeadlessMenu v-if="user" as="div" relative ml-3>
               <div>
                 <HeadlessMenuButton flex rounded-full bg-gray-600 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green>
                   <span sr-only>Foydalanuvchi menyusini ochish</span>
-                  <img v-if="user.user_metadata.avatar_url" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="">
-                  <div v-else bg-slate-gray rounded-full p-2 text-xl>
+                  <NuxtImg v-if="user.user_metadata.avatar_url" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="" />
+                  <div v-else rounded-full bg-slate-gray p-2 text-xl>
                     <div i-carbon-user />
                   </div>
                 </HeadlessMenuButton>
@@ -86,15 +81,15 @@ const navigation = ref<{ name: string, to: string, isActive: boolean }[]>([
 
     <HeadlessDisclosurePanel md:hidden>
       <div pb-3 pt-2 space-y-1>
-        <HeadlessDisclosureButton v-for="item in navigation" :key="item.name.toLowerCase().split(' ').join('-')" as="a" :href="item.to" hover:bg-slate-gray block border-l-4 py-2 pl-3 pr-4 text-base text-gray-200 font-medium hover:bg-opacity-25 :class="[item.isActive ? 'border-green' : '']">
+        <HeadlessDisclosureButton v-for="item in navigation" :key="item.name.toLowerCase().split(' ').join('-')" as="a" :href="item.to" block border-l-4 py-2 pl-3 pr-4 text-base text-gray-200 font-medium hover:border-green hover:bg-slate-gray hover:bg-opacity-25 hover:text-green>
           {{ item.name }}
         </HeadlessDisclosureButton>
       </div>
       <div v-if="user" border-t border-gray-200 pb-3 pt-4>
         <div flex items-center px-4>
           <div flex-shrink-0>
-            <img v-if="user.user_metadata.avatar_url" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="">
-            <div v-else bg-slate-gray rounded-full p-2 text-xl>
+            <NuxtImg v-if="user.user_metadata.avatar_url" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="" />
+            <div v-else rounded-full bg-slate-gray p-2 text-xl>
               <div i-carbon-user />
             </div>
           </div>

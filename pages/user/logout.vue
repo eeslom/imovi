@@ -1,8 +1,10 @@
 <script setup lang="ts">
 const { auth } = useSupabaseClient()
 
-onBeforeMount(async () => {
+async function logout() {
   await auth.signOut()
   navigateTo('/')
-})
+}
+
+onBeforeMount(logout)
 </script>

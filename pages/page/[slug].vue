@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo'
-
 const route = useRoute()
-// const { copy } = useClipboard()
 
 const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
 if (!page.value)
-  throw createError({ statusCode: 404, statusMessage: 'Article not found', fatal: true })
-
-console.log(page.value)
+  throw createError({ statusCode: 404, statusMessage: 'Sahifa topilmadi', fatal: true })
 
 useSeoMeta({
   title: page.value.head?.title || page.value.title,
@@ -27,13 +22,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="prose">
-    <LazyContentDoc>
-      <template #not-found>
-        <h2 text-center>
-          awd
-        </h2>
-      </template>
-    </LazyContentDoc>
+  <main class="prose" min-h-xl>
+    <LazyContentDoc />
   </main>
 </template>

@@ -6,7 +6,7 @@ defineProps<{
 
 <template>
   <div overflow-hidden shadow-md>
-    <img :src="movie.poster_path" :alt="movie.title" h-80 w-full rounded-lg object-cover>
+    <NuxtImg :src="movie.poster_path" :alt="movie.title" h-80 w-full rounded-lg object-cover />
     <div mb-2 truncate whitespace-nowrap text-xl font-semibold>
       {{ movie.title }}
     </div>
