@@ -11,26 +11,66 @@ function closeModal() {
   isOpen.value = false
 }
 
-const state = reactive({
+const loginState = reactive<{ email: string, password: string, errorMsg: string }>({
   email: '',
   password: '',
   errorMsg: '',
 })
 
+const registerState = reactive<{ name: string, email: string, gender: 'male' | 'female', password: { password: string, confirm: string }, errorMsg: string }>({
+  name: '',
+  email: '',
+  gender: 'male',
+  password: {
+    password: '',
+    confirm: '',
+  },
+  errorMsg: '',
+})
+
 const redirectTo = `${useRuntimeConfig().public.baseUrl}/user/confirm`
 
-async function loginWithPassword() {
-  const { error, data } = await supabase.auth.signInWithPassword({
-    email: state.email,
-    password: state.password,
-  })
+async function logIn() {
+  try {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: loginState.email,
+      password: loginState.password,
+    })
 
-  if (error) {
-    state.errorMsg = error.message
-    setTimeout(() => state.errorMsg = '', 3000)
+    if (error) {
+      loginState.errorMsg = error.message
+      setTimeout(() => loginState.errorMsg = '', 3000)
+    }
   }
+  catch (error: any) {
+    throw createError({ message: error.message })
+  }
+}
 
-  console.log(data)
+async function signUp() {
+  try {
+    if (registerState.password.password === registerState.password.confirm) {
+      const { error } = await supabase.auth.signUp({
+        email: registerState.email,
+        password: registerState.password.password,
+        options: {
+          data: {
+            avatar_url: '',
+            name: registerState.name,
+            gender: registerState.gender,
+          },
+        },
+      })
+
+      if (error) {
+        registerState.errorMsg = error.message
+        setTimeout(() => registerState.errorMsg = '', 3000)
+      }
+    }
+  }
+  catch (error: any) {
+    throw createError({ message: error.message })
+  }
 }
 
 async function logInWithOAuth(provider: 'google' | 'facebook') {
@@ -48,11 +88,7 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
 
 <template>
   <div inset-0 flex items-center justify-center>
-    <button
-      type="button"
-      inline-flex items-center gap-2 btn
-      @click="openModal"
-    >
+    <button type="button" inline-flex items-center gap-2 btn @click="openModal">
       <div i-carbon-login inline-block text-lg />
       Kirish
     </button>
@@ -60,82 +96,186 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
   <HeadlessTransitionRoot appear :show="isOpen" as="template">
     <HeadlessDialog as="div" relative z-10 @close="closeModal">
       <HeadlessTransitionChild
-        as="template"
-        enter="duration-300 ease-out"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="duration-200 ease-in"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
+        as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
+        leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0"
       >
         <div fixed inset-0 bg-black bg-opacity-25 />
       </HeadlessTransitionChild>
 
       <div fixed inset-0 overflow-y-auto>
-        <div
-          min-h-full flex items-center justify-center p-4 text-center
-        >
+        <div min-h-full flex items-center justify-center p-4 text-center>
           <HeadlessTransitionChild
-            as="template"
-            enter="duration-300 ease-out"
-            enter-from="opacity-0 scale-95"
-            enter-to="opacity-100 scale-100"
-            leave="duration-200 ease-in"
-            leave-from="opacity-100 scale-100"
+            as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
+            enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
             leave-to="opacity-0 scale-95"
           >
             <HeadlessDialogPanel
-              max-w-md w-full transform overflow-hidden rounded-lg bg-dark-gray p-4 text-left align-middle transition-all
+              max-w-md w-full transform overflow-hidden rounded-lg bg-dark-gray p-4 text-left
+              align-middle transition-all
             >
-              <div w-full flex items-center justify-between>
-                <HeadlessDialogTitle
-                  as="h3"
-                  text-lg font-medium leading-6
-                >
-                  Kirish
-                </HeadlessDialogTitle>
-                <div>
-                  <button @click="closeModal">
-                    <div i-carbon-close inline-block text-lg />
-                  </button>
-                </div>
-              </div>
-
-              <div mt-4>
-                <form space-y-4 @submit.prevent="loginWithPassword">
-                  <div>
-                    <div mt-1>
-                      <input v-model="state.email" type="email" autocomplete="email" placeholder="Email pochtangizni kiriting..." field>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div mt-1>
-                      <input v-model="state.password" type="password" placeholder="Parolingizni kiriting..." field>
-                    </div>
-                  </div>
-
-                  <div v-if="state.errorMsg" text-sm text-red>
-                    {{ state.errorMsg }}
-                  </div>
-
-                  <div flex items-center justify-between>
-                    <span />
-
-                    <div text-sm>
-                      <NuxtLink to="/" text-green font-medium hover:text-dark-green>
-                        Parolni unutdingizmi?
-                      </NuxtLink>
-                    </div>
-                  </div>
-
-                  <div>
-                    <button type="submit" w-full flex justify-center btn>
+              <HeadlessTabGroup>
+                <HeadlessTabList mx-auto flex items-center justify-center gap-2 text-center>
+                  <HeadlessTab v-slot="{ selected }" as="template">
+                    <button text-lg font-semibold icon-btn :class="{ 'text-green': selected }">
                       Kirish
                     </button>
-                  </div>
-                </form>
-              </div>
+                  </HeadlessTab>
+                  <span text-lg font-semibold>|</span>
+                  <HeadlessTab v-slot="{ selected }" as="template">
+                    <button text-lg font-semibold icon-btn :class="{ 'text-green': selected }">
+                      Ro'yhatdan o'tish
+                    </button>
+                  </HeadlessTab>
+                </HeadlessTabList>
+                <HeadlessTabPanels>
+                  <HeadlessTabPanel>
+                    <div mt-5>
+                      <form space-y-4 @submit.prevent="logIn">
+                        <div>
+                          <div mt-1 flex>
+                            <span field-add-on>
+                              <div i-carbon-email />
+                            </span>
+                            <input
+                              v-model="loginState.email" type="email" autocomplete="email"
+                              placeholder="Email pochtangizni kiriting" required field rounded-s-none
+                            >
+                          </div>
+                        </div>
+
+                        <div>
+                          <div mt-1 flex>
+                            <span field-add-on>
+                              <div i-carbon-password />
+                            </span>
+                            <input
+                              v-model="loginState.password" type="password" placeholder="Parolingizni kiriting..."
+                              required field rounded-s-none
+                            >
+                          </div>
+                        </div>
+
+                        <div v-if="loginState.errorMsg" text-sm text-red>
+                          {{ loginState.errorMsg }}
+                        </div>
+
+                        <div flex items-center justify-between>
+                          <span />
+
+                          <div text-sm>
+                            <NuxtLink to="/" text-green font-medium hover:text-dark-green>
+                              Parolni unutdingizmi?
+                            </NuxtLink>
+                          </div>
+                        </div>
+
+                        <div>
+                          <button type="submit" w-full flex justify-center btn>
+                            Kirish
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </HeadlessTabPanel>
+                  <HeadlessTabPanel>
+                    <div mt-5>
+                      <form space-y-4 @submit.prevent="signUp">
+                        <div>
+                          <div mt-1 flex>
+                            <span field-add-on>
+                              <div i-carbon-email />
+                            </span>
+                            <input
+                              v-model="registerState.name" type="text" autocomplete="name"
+                              placeholder="To'liq ismingizni kiriting" required field rounded-s-none
+                            >
+                          </div>
+                        </div>
+
+                        <div>
+                          <div mt-1 flex>
+                            <span field-add-on>
+                              <div i-carbon-email />
+                            </span>
+                            <input
+                              v-model="registerState.email" type="email" autocomplete="email"
+                              placeholder="Email pochtangizni kiriting" required field rounded-s-none
+                            >
+                          </div>
+                        </div>
+
+                        <div>
+                          <div mt-1 flex>
+                            <span field-add-on>
+                              <div i-carbon-gender-male />
+                            </span>
+                            <HeadlessRadioGroup v-model="registerState.gender" w-full>
+                              <HeadlessRadioGroupOption v-slot="{ checked }" value="male">
+                                <div field flex items-center justify-between :class="{ 'border-green': checked }" rounded-s-none>
+                                  Erkak <div v-if="checked" rounded-full bg-green p-0.3>
+                                    <div i-carbon-checkmark />
+                                  </div>
+                                </div>
+                              </HeadlessRadioGroupOption>
+                              <HeadlessRadioGroupOption v-slot="{ checked }" value="female">
+                                <div field flex items-center justify-between :class="{ 'border-green': checked }" rounded-s-none>
+                                  Ayol <div v-if="checked" rounded-full bg-green p-0.3>
+                                    <div i-carbon-checkmark />
+                                  </div>
+                                </div>
+                              </HeadlessRadioGroupOption>
+                            </HeadlessRadioGroup>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div mt-1 flex>
+                            <span field-add-on>
+                              <div i-carbon-password />
+                            </span>
+                            <input
+                              v-model="registerState.password.password" type="password"
+                              placeholder="Parolni kiriting" required field rounded-s-none
+                            >
+                          </div>
+                        </div>
+
+                        <div>
+                          <div mt-1 flex>
+                            <span field-add-on>
+                              <div i-carbon-password />
+                            </span>
+                            <input
+                              v-model="registerState.password.confirm" type="password"
+                              placeholder="Parolni qayta kiriting" required field rounded-s-none
+                            >
+                          </div>
+                        </div>
+
+                        <div v-if="registerState.errorMsg" text-sm text-red>
+                          {{ registerState.errorMsg }}
+                        </div>
+
+                        <div flex items-center justify-between>
+                          <span />
+
+                          <div text-sm>
+                            <NuxtLink to="/" text-green font-medium hover:text-dark-green>
+                              Parolni unutdingizmi?
+                            </NuxtLink>
+                          </div>
+                        </div>
+
+                        <div>
+                          <button type="submit" w-full flex justify-center btn>
+                            Ro'yhatdan o'tish
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </HeadlessTabPanel>
+                </HeadlessTabPanels>
+              </HeadlessTabGroup>
 
               <div relative mt-2>
                 <div absolute inset-0 flex items-center>
@@ -152,7 +292,10 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                     <span sr-only>Google orqali kirish</span>
                     <div i-logos-google-icon inline-block />
                   </button>
-                  <button iconic-btn disabled title="Xozircha ushbu yo'l bilan kira olmaysiz" @click="logInWithOAuth('facebook')">
+                  <button
+                    iconic-btn disabled title="Xozircha ushbu yo'l bilan kira olmaysiz"
+                    @click="logInWithOAuth('facebook')"
+                  >
                     <span sr-only>Facebook orqali kirish</span>
                     <div i-logos-facebook inline-block />
                   </button>

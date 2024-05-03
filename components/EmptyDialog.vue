@@ -5,6 +5,16 @@ defineProps({
     required: false,
     default: false,
   },
+  title: {
+    type: String,
+    required: false,
+    default: '',
+  },
+  description: {
+    type: String,
+    required: false,
+    default: '',
+  },
 })
 
 const emit = defineEmits<{
@@ -52,7 +62,7 @@ function closeModal() {
                   as="h3"
                   text-lg text-gray-200 font-medium leading-6
                 >
-                  <slot name="title" />
+                  {{ !$slots.title ? title : null }} <slot name="title" />
                 </HeadlessDialogTitle>
                 <button text-gray-200 @click="closeModal">
                   <div i-carbon-close />
@@ -60,7 +70,7 @@ function closeModal() {
               </div>
               <div mt-2>
                 <p text-sm text-gray-400>
-                  <slot name="description" />
+                  {{ !$slots.description ? description : null }} <slot name="description" />
                 </p>
               </div>
 

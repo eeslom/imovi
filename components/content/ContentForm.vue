@@ -5,6 +5,7 @@ interface State {
   sect: 'technical' | 'films'
   title: string
   message: string
+  dialog: { title: string, description: string }
 }
 
 const state = reactive<State>({
@@ -13,6 +14,10 @@ const state = reactive<State>({
   sect: 'technical',
   title: '',
   message: '',
+  dialog: {
+    title: '',
+    description: '',
+  },
 })
 
 const isOpen = ref<boolean>(false)
@@ -36,6 +41,18 @@ async function sendData() {
     state.title = ''
     state.sect = 'technical'
     state.message = ''
+    state.dialog.title = 'Xabaringiz muvaffaqiyatli yuborildi'
+    state.dialog.description = 'Tashakkur. Xabaringiz muvaffaqiyatli yuborildi, xabaringizni ko\'rib chiqib sizga tez orada aloqaga chiqamiz.'
+    isOpen.value = true
+  }
+  else if (status.value === 'error') {
+    state.name = ''
+    state.reachUrl = ''
+    state.title = ''
+    state.sect = 'technical'
+    state.message = ''
+    state.dialog.title = 'Xabaringiz yuborilmadi'
+    state.dialog.description = 'Afsuski xabar yuborishda xatolik yuz berdi iltimos keyinroq urinib ko\'ring.'
     isOpen.value = true
   }
 }
@@ -85,13 +102,6 @@ async function sendData() {
         Yuborish
       </button>
     </form>
-    <EmptyDialog :is-open="isOpen" @close-modal="closeModal">
-      <template #title>
-        Xabar muvaffaqiyatli yuborildi
-      </template>
-      <template #description>
-        Xabaringiz muvaffaqiyatli yuborildi, tez orada xabaringizni ko'rib chiqamiz va siz bilan bog'lanamiz
-      </template>
-    </EmptyDialog>
+    <EmptyDialog :title="state.dialog.title" :description="state.dialog.description" :is-open="isOpen" @close-modal="closeModal" />
   </div>
 </template>
