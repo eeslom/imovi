@@ -105,13 +105,13 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                 <form space-y-4 @submit.prevent="loginWithPassword">
                   <div>
                     <div mt-1>
-                      <input v-model="state.email" type="email" autocomplete="email" placeholder="Email pochtangizni kiriting..." block w-full appearance-none border-1 border-gray-500 rounded-md bg-slate-gray px-3 py-2 text-gray-200 shadow-sm focus:border-green sm:text-sm focus:outline-none focus:ring-green placeholder-gray-400>
+                      <input v-model="state.email" type="email" autocomplete="email" placeholder="Email pochtangizni kiriting..." field>
                     </div>
                   </div>
 
                   <div>
                     <div mt-1>
-                      <input v-model="state.password" type="password" placeholder="Parolingizni kiriting..." block w-full appearance-none border-1 border-gray-500 rounded-md bg-slate-gray px-3 py-2 text-gray-200 shadow-sm focus:border-green sm:text-sm focus:outline-none focus:ring-green placeholder-gray-400>
+                      <input v-model="state.password" type="password" placeholder="Parolingizni kiriting..." field>
                     </div>
                   </div>
 

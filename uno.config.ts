@@ -14,6 +14,8 @@ export default defineConfig({
     ['btn', 'px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
     ['icon-btn', 'inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600'],
     ['iconic-btn', 'w-full flex items-center justify-center rounded bg-gray-100 py-2 hover:bg-gray-200 disabled:opacity-50 disabled:bg-gray-300'],
+    ['field', 'block w-full appearance-none border-1 border-gray-500 rounded-md bg-slate-gray px-3 py-2 text-gray-200 shadow-sm focus:border-green sm:text-sm focus:outline-none focus:ring-green placeholder-gray-400'],
+    ['field-add-on', 'inline-flex items-center border-1 border-r-0 border-gray-500 rounded-l-md bg-slate-gray px-3 text-gray-200 sm:text-sm'],
   ],
   theme: {
     colors: {

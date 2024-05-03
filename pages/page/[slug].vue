@@ -22,7 +22,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="prose" min-h-xl>
+  <main class="prose" p-4>
     <LazyContentDoc />
   </main>
 </template>
