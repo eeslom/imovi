@@ -18,7 +18,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+      baseUrl: process.env.NUXT_BASE_URL || 'http://localhost:3000',
+      publicUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://imovi.uz',
       supabase: {
         url: process.env.SUPABASE_URL,
         key: process.env.SUPABASE_KEY,
@@ -28,6 +29,10 @@ export default defineNuxtConfig({
         chatId: process.env.TELEGRAM_CHAT_ID,
       },
     },
+  },
+
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://imovi.uz',
   },
 
   supabase: {
@@ -42,17 +47,21 @@ export default defineNuxtConfig({
     prefix: 'Headless',
   },
 
-  experimental: {
-    // when using generate, payload js assets included in sw precache manifest
-    // but missing on offline, disabling extraction it until fixed
-    payloadExtraction: false,
-    renderJsonPayloads: true,
-    typedPages: true,
-  },
-
   css: [
     '@unocss/reset/tailwind.css',
   ],
+
+  nitro: {
+    esbuild: {
+      options: {
+        target: 'esnext',
+      },
+    },
+    prerender: {
+      crawlLinks: false,
+      routes: ['/'],
+    },
+  },
 
   content: {
     highlight: {
@@ -64,17 +73,10 @@ export default defineNuxtConfig({
     },
   },
 
-  nitro: {
-    esbuild: {
-      options: {
-        target: 'esnext',
-      },
-    },
-    prerender: {
-      crawlLinks: false,
-      routes: ['/'],
-      ignore: ['/page/**', '/page/*'],
-    },
+  experimental: {
+    payloadExtraction: false,
+    renderJsonPayloads: true,
+    typedPages: true,
   },
 
   app: {
@@ -91,6 +93,7 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: appDescription },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+        { name: 'yandex-verification', content: 'fb62c84b8401ccc7' },
       ],
     },
   },

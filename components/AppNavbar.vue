@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
 
-const searchStore = useSearchStore()
-
 const navigation = ref<{ name: string, to: string }[]>([
   {
     name: 'Filmlar',
@@ -22,7 +20,7 @@ const userNavigation = ref<{ name: string, to: string, icon: string }[]>([
 </script>
 
 <template>
-  <HeadlessDisclosure v-slot="{ open }" as="nav" bg-dark-gray shadow>
+  <HeadlessDisclosure v-slot="{ open }" as="nav" relative bg-dark-gray shadow>
     <div mx-auto max-w-7xl px-4 lg:px-8 sm:px-6>
       <div h-16 flex justify-between>
         <div flex>
@@ -38,10 +36,7 @@ const userNavigation = ref<{ name: string, to: string, icon: string }[]>([
           </div>
         </div>
         <div flex items-center>
-          <button icon-btn @click="searchStore.toggleSearch">
-            <div v-if="searchStore.searchOpen" i-carbon-search text-lg />
-            <div v-else i-carbon-close text-lg />
-          </button>
+          <AppSearch />
           <div hidden md:ml-8 md:flex md:items-center>
             <HeadlessMenu v-if="user" as="div" relative ml-3>
               <div>

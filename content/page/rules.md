@@ -4,7 +4,7 @@ navigation:
   title: Sayt qoidalari
 ---
 
-# {{ $doc.title }}
+# [{{ $doc.title }}]{.uppercase}
 
 1. **Fikrlar va Sharhlar**:
 
@@ -13,7 +13,7 @@ navigation:
 
 2. **Avtorlik Huquqlari**:
 
-   - Filmlar, rasmlar va boshqa ma'lumotlar uchun avtorlik huquqlari muhokama qilinadi.
+   - Filmlar, rasmlar va boshqa ma'lumotlar uchun avtorlik huquqlari muhokama qilinadi, agar biror bir ma'lumotlar tashqariga chiqadigan bo'lsa unga &copy; copyright belgisini qo'yishni unutmang.
    - Avtorlik huquqlari buzish mumkin emas.
 
 3. **Qonunlarga Rioya Qilish**:

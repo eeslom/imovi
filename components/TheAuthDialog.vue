@@ -89,7 +89,7 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
 <template>
   <div inset-0 flex items-center justify-center>
     <button type="button" inline-flex items-center gap-2 btn @click="openModal">
-      <div i-carbon-login inline-block text-lg />
+      <div i-carbon-login inline-block text-lg aria-hidden="true" />
       Kirish
     </button>
   </div>

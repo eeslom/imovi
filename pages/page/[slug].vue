@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { appDescription } from '~/constants'
+
 const route = useRoute()
 
 const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
@@ -7,16 +9,15 @@ if (!page.value)
 
 useSeoMeta({
   title: page.value.head?.title || page.value.title,
-  description: page.value.head?.description || page.value.description,
+  description: appDescription,
 })
 
 const title = page.value.head?.title || page.value.title
-const description = page.value.head?.description || page.value.description
 useSeoMeta({
   titleTemplate: '%s · Imovi',
   title,
-  description,
-  ogDescription: description,
+  description: appDescription,
+  ogDescription: appDescription,
   ogTitle: `${title} · Imovi`,
 })
 </script>

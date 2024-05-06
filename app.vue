@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { appName } from '~/constants'
+import { appDescription, appName } from '~/constants'
+
+const { public: { publicUrl } } = useRuntimeConfig()
 
 provideHeadlessUseId(() => useId())
 
@@ -9,6 +11,12 @@ useHead({
 })
 
 useSeoMeta({
+  ogTitle: appName,
+  ogDescription: appDescription,
+  ogImage: '/maskable-icon.png',
+  ogLocale: 'uz_UZ',
+  ogUrl: publicUrl,
+  ogLocaleAlternate: ['en_US', 'ru_RU'],
   ogSiteName: 'Imovi',
   ogType: 'website',
 })
