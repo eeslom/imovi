@@ -7,16 +7,16 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink :to="`/movies/${item.id}-${item.title.toLowerCase().split(' ').join('-')}`">
-    <li>
+  <li w-full>
+    <NuxtLink :to="`/movies/${item.id}-${item.title.toLowerCase().split(' ').join('-')}`">
       <div>
-        <NuxtImg format="webp" rounded-lg :src="item.poster_path" :alt="item.title" />
+        <NuxtImg w-full format="webp" rounded-lg :src="item.poster_path" :alt="item.title" />
       </div>
       <div>
         <h3 truncate whitespace-normal>
           {{ item.title }}
         </h3>
       </div>
-    </li>
-  </NuxtLink>
+    </NuxtLink>
+  </li>
 </template>
