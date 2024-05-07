@@ -90,10 +90,10 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
       ],
       meta: [
+        { name: 'yandex-verification', content: 'fb62c84b8401ccc7' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: appDescription },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
-        { name: 'yandex-verification', content: 'fb62c84b8401ccc7' },
       ],
     },
   },
