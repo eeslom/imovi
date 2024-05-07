@@ -26,7 +26,7 @@ const userNavigation = ref<{ name: string, to: string, icon: string }[]>([
         <div flex>
           <div flex flex-shrink-0 items-center>
             <NuxtLink to="/">
-              <NuxtImg block h-7 w-auto object-cover sm:h-8 src="/logo.png" alt="Imovi" />
+              <img block h-7 w-auto object-cover sm:h-8 src="/logo.png" alt="Imovi">
             </NuxtLink>
           </div>
           <div hidden sm:ml-10 md:flex md:space-x-8>
@@ -42,7 +42,7 @@ const userNavigation = ref<{ name: string, to: string, icon: string }[]>([
               <div>
                 <HeadlessMenuButton flex rounded-full bg-gray-600 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green>
                   <span sr-only>Foydalanuvchi menyusini ochish</span>
-                  <NuxtImg v-if="user.user_metadata.avatar_url" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="" />
+                  <img v-if="user.user_metadata.avatar_url" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="User">
                   <div v-else rounded-full bg-slate-gray p-2 text-xl>
                     <div i-carbon-user />
                   </div>
@@ -84,7 +84,7 @@ const userNavigation = ref<{ name: string, to: string, icon: string }[]>([
         <NuxtLink to="/user/profile">
           <div flex items-center px-4>
             <div flex-shrink-0>
-              <NuxtImg v-if="user.user_metadata.avatar_url" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="" />
+              <img v-if="user.user_metadata.avatar_url" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="User">
               <div v-else rounded-full bg-slate-gray p-2 text-xl>
                 <div i-carbon-user />
               </div>

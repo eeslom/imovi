@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { Database } from '~/types/database.types'
+
 defineProps<{
-  item: any
+  item: Database['public']['Tables']['movies']['Row']
 }>()
 </script>
 
