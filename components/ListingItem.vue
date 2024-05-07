@@ -8,15 +8,15 @@ defineProps<{
 
 <template>
   <NuxtLink :to="`/movies/${item.id}-${item.title.toLowerCase().split(' ').join('-')}`">
-    <div>
+    <li>
       <div>
-        <img rounded-lg :src="item.poster_path" :alt="item.title">
+        <NuxtImg format="webp" rounded-lg :src="item.poster_path" :alt="item.title" />
       </div>
       <div>
         <h3 truncate whitespace-normal>
           {{ item.title }}
         </h3>
       </div>
-    </div>
+    </li>
   </NuxtLink>
 </template>

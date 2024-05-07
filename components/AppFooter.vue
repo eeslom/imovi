@@ -4,7 +4,7 @@
       <div mx-auto max-w-7xl w-full flex flex-col items-center justify-between gap-y-10 p-4 sm:flex-row>
         <div text-sm>
           <NuxtLink to="/">
-            <img width="180" src="/logo.png" alt="Imovi">
+            <NuxtImg format="webp" width="180" src="/logo.png" alt="Imovi" />
           </NuxtLink>
           <div mt-4 text-gray-400>
             © {{ new Date().getFullYear() }} - Imovi.uz

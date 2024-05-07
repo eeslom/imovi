@@ -5,8 +5,8 @@ const searchStore = useSearchStore()
 <template>
   <div z-1000 flex items-center>
     <button flex items-center justify-center text-lg icon-btn @click="searchStore.toggleSearch">
-      <div v-if="!searchStore.searchOpen" i-carbon-search />
-      <div v-else i-carbon-close />
+      <div v-if="!searchStore.searchOpen" i-carbon-search aria-hidden="true" aria-label="Search" />
+      <div v-else i-carbon-close aria-hidden="true" aria-label="Close" />
     </button>
   </div>
   <div v-if="searchStore.searchOpen" absolute left-0 top-0 z-100 h-full w-full bg-black bg-op-75 duration-300>
