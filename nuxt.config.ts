@@ -44,6 +44,10 @@ export default defineNuxtConfig({
     },
   },
 
+  image: {
+    provider: 'netlify',
+  },
+
   css: [
     '@unocss/reset/tailwind.css',
   ],
