@@ -18,7 +18,7 @@ useHead({
         <div sm:ml-6>
           <div sm:border-l sm:border-gray-200 sm:pl-6>
             <h1 text-balance text-4xl text-gray-200 font-bold tracking-tight sm:text-5xl>
-              {{ error?.statusMessage }}
+              {{ error?.statusMessage || 'Xatolik yuz berdi' }}
             </h1>
             <div mt-2 flex flex-col gap-2>
               <p text-balance text-base text-gray-400>

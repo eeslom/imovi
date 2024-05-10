@@ -8,7 +8,11 @@ const navigation = ref<{ name: string, to: string }[]>([
   },
   {
     name: 'Multfilmlar',
-    to: '/',
+    to: '/genre/3',
+  },
+  {
+    name: 'Kino yangliklari',
+    to: 'http://kinochi.net/',
   },
 ])
 
@@ -20,17 +24,17 @@ const userNavigation = ref<{ name: string, to: string, icon: string }[]>([
 </script>
 
 <template>
-  <HeadlessDisclosure v-slot="{ open }" as="nav" relative bg-dark-gray shadow>
+  <HeadlessDisclosure v-slot="{ open }" as="nav" sticky left-0 top-0 z-10 bg-dark-gray shadow-dark-gray shadow-md>
     <div mx-auto max-w-7xl px-4 lg:px-8 sm:px-6>
       <div h-16 flex justify-between>
         <div flex>
           <div flex flex-shrink-0 items-center>
             <NuxtLink to="/">
-              <img block h-7 w-auto object-cover sm:h-8 src="/logo.png" alt="Imovi">
+              <NuxtImg format="webp" block h-7 w-auto object-cover sm:h-8 src="/logo.png" alt="Imovi" />
             </NuxtLink>
           </div>
           <div hidden sm:ml-10 md:flex md:space-x-8>
-            <NuxtLink v-for="item in navigation" :key="item.name.toLowerCase().split(' ').join('-')" :to="item.to" inline-flex items-center px-1 pt-1 text-sm text-gray-100 font-medium hover:text-green>
+            <NuxtLink v-for="item in navigation" :key="item.name.toLowerCase().split(' ').join('-')" :to="item.to" inline-flex items-center px-1 pt-1 text-sm text-gray-100 font-medium uppercase hover:text-green>
               {{ item.name }}
             </NuxtLink>
           </div>
@@ -42,7 +46,7 @@ const userNavigation = ref<{ name: string, to: string, icon: string }[]>([
               <div>
                 <HeadlessMenuButton flex rounded-full bg-gray-600 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green>
                   <span sr-only>Foydalanuvchi menyusini ochish</span>
-                  <img v-if="user.user_metadata.avatar_url" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="User">
+                  <NuxtImg v-if="user.user_metadata.avatar_url" format="webp" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="User" />
                   <div v-else rounded-full bg-slate-gray p-2 text-xl>
                     <div i-carbon-user />
                   </div>
@@ -84,7 +88,7 @@ const userNavigation = ref<{ name: string, to: string, icon: string }[]>([
         <NuxtLink to="/user/profile">
           <div flex items-center px-4>
             <div flex-shrink-0>
-              <img v-if="user.user_metadata.avatar_url" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="User">
+              <NuxtImg v-if="user.user_metadata.avatar_url" format="webp" h-10 w-10 rounded-full :src="user.user_metadata.avatar_url" alt="User" />
               <div v-else rounded-full bg-slate-gray p-2 text-xl>
                 <div i-carbon-user />
               </div>
@@ -101,7 +105,7 @@ const userNavigation = ref<{ name: string, to: string, icon: string }[]>([
         </NuxtLink>
         <div mt-3 space-y-1>
           <HeadlessDisclosureButton as="template">
-            <NuxtLink to="/user/logout" flex items-center gap-2 px-4 py-2 text-base text-gray-500 font-medium hover:bg-gray-100 hover:text-gray-800>
+            <NuxtLink flex items-center gap-2 px-4 py-2 text-base text-gray-500 font-medium hover:bg-gray-100 hover:text-gray-800>
               <div i-carbon-logout /> Chiqish
             </NuxtLink>
           </HeadlessDisclosureButton>

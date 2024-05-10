@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/image',
     '@nuxtjs/sitemap',
+    'nuxt-swiper',
   ],
 
   runtimeConfig: {
@@ -38,18 +39,18 @@ export default defineNuxtConfig({
   supabase: {
     redirect: false,
     redirectOptions: {
-      login: '/user/login',
+      login: '/',
       callback: '/user/confirm',
     },
-  },
-
-  headlessui: {
-    prefix: 'Headless',
   },
 
   css: [
     '@unocss/reset/tailwind.css',
   ],
+
+  headlessui: {
+    prefix: 'Headless',
+  },
 
   nitro: {
     esbuild: {

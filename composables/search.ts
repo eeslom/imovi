@@ -1,25 +1,25 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
 export const useSearchStore = defineStore('search', () => {
-  const searchOpen = ref<boolean>(false)
+  const isOpen = ref<boolean>(false)
 
-  function toggleSearch() {
-    searchOpen.value = !searchOpen.value
+  function toggle() {
+    isOpen.value = !isOpen.value
   }
 
-  function openSearch(): void {
-    searchOpen.value = true
+  function open(): void {
+    isOpen.value = true
   }
 
-  function closeSearch(): void {
-    searchOpen.value = false
+  function close(): void {
+    isOpen.value = false
   }
 
   return {
-    searchOpen,
-    toggleSearch,
-    openSearch,
-    closeSearch,
+    isOpen,
+    toggle,
+    open,
+    close,
   }
 })
 

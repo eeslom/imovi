@@ -1,20 +1,105 @@
 <script setup lang="ts">
 const searchStore = useSearchStore()
+
+const q = ref<string>('')
+
+const results = ref<any>()
+
+const isLoading = ref<boolean>(false)
+
+async function searchData() {
+  try {
+    if (q.value) {
+      isLoading.value = true
+      const data = await $fetch('/api/search', {
+        params: {
+          q: q.value,
+          limit: 3,
+        },
+      })
+      isLoading.value = false
+      results.value = data
+    }
+    else {
+      isLoading.value = false
+      results.value = null
+    }
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
+
+watch(() => searchStore.isOpen, (val) => {
+  if (val === false) {
+    q.value = ''
+    results.value = null
+  }
+})
 </script>
 
 <template>
-  <div z-1000 flex items-center>
-    <button flex items-center justify-center text-lg icon-btn @click="searchStore.toggleSearch">
-      <div v-if="!searchStore.searchOpen" i-carbon-search aria-hidden="true" aria-label="Search" />
-      <div v-else i-carbon-close aria-hidden="true" aria-label="Close" />
+  <div v-if="!searchStore.isOpen" inset-0 flex items-center justify-center>
+    <button
+      type="button"
+      rounded-md px-4 py-2 text-white font-medium focus:outline-none
+      @click="searchStore.open"
+    >
+      <div i-carbon-search />
     </button>
   </div>
-  <div v-if="searchStore.searchOpen" absolute left-0 top-0 z-100 h-full w-full bg-black bg-op-75 duration-300>
-    <div absolute left-0 top-0 z--1 h-full w-full @click="searchStore.closeSearch" />
-    <div justify-centerfy z-10 mx-auto h-full max-w-4xl w-full flex items-center>
-      <form w-full @submit.prevent>
-        <input type="search" placeholder="Qidirish..." field w-full>
-      </form>
-    </div>
-  </div>
+  <HeadlessTransitionRoot appear :show="searchStore.isOpen" as="template">
+    <HeadlessDialog as="div" relative z-10 @close="searchStore.close">
+      <HeadlessTransitionChild
+        as="template"
+        enter="duration-300 ease-out"
+        enter-from="opacity-0"
+        enter-to="opacity-100"
+        leave="duration-200 ease-in"
+        leave-from="opacity-100"
+        leave-to="opacity-0"
+      >
+        <div fixed inset-0 bg-black bg-op-75 />
+      </HeadlessTransitionChild>
+
+      <div fixed inset-0 overflow-y-auto>
+        <div
+          flex justify-center p-4 text-center
+        >
+          <HeadlessTransitionChild
+            as="template"
+            enter="duration-300 ease-out"
+            enter-from="opacity-0 scale-95"
+            enter-to="opacity-100 scale-100"
+            leave="duration-200 ease-in"
+            leave-from="opacity-100 scale-100"
+            leave-to="opacity-0 scale-95"
+          >
+            <HeadlessDialogPanel
+              mt-5 max-w-4xl w-full transform overflow-hidden text-left align-middle transition-all
+            >
+              <div mt-2 w-full>
+                <form flex items-center justify-between gap-5 @submit.prevent="searchData">
+                  <div relative w-full flex>
+                    <span field-add-on>
+                      <div i-carbon-search />
+                    </span>
+                    <input v-model="q" rounded-s-none type="text" field placeholder="Qidirish..." @input="searchData">
+                    <div v-if="isLoading" absolute right-2 self-center>
+                      <div i-svg-spinners-270-ring />
+                    </div>
+                  </div>
+                  <button rounded-e rounded-s-none icon-btn @click="searchStore.close">
+                    <span sr-only>Yopish</span>
+                    <div i-carbon-close text-xl />
+                  </button>
+                </form>
+                <SearchResults v-if="results && results.length" :results="results" />
+              </div>
+            </HeadlessDialogPanel>
+          </HeadlessTransitionChild>
+        </div>
+      </div>
+    </HeadlessDialog>
+  </HeadlessTransitionRoot>
 </template>

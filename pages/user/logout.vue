@@ -1,14 +1,23 @@
 <script setup lang="ts">
 definePageMeta({
+  layout: 'empty',
   middleware: 'auth',
 })
 
-const { auth } = useSupabaseClient()
+const supabase = useSupabaseClient()
 
 async function logout() {
-  await auth.signOut()
+  await supabase.auth.signOut()
   navigateTo('/')
 }
 
-onBeforeMount(logout)
+onMounted(logout)
 </script>
+
+<template>
+  <div h-screen w-full flex items-center justify-center>
+    <span text-xl font-semibold>
+      Chiqilmoqda...
+    </span>
+  </div>
+</template>

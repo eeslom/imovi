@@ -57,6 +57,7 @@ async function signUp() {
           data: {
             avatar_url: '',
             name: registerState.name,
+            favorites: [],
             gender: registerState.gender,
           },
         },
@@ -66,6 +67,11 @@ async function signUp() {
         registerState.errorMsg = error.message
         setTimeout(() => registerState.errorMsg = '', 3000)
       }
+
+      navigateTo('/user/confirm')
+    }
+    else {
+      registerState.errorMsg = 'Parollar bir-biriga to\'g\'ri kelmadi'
     }
   }
   catch (error: any) {
@@ -138,7 +144,7 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                             </span>
                             <input
                               v-model="loginState.email" type="email" autocomplete="email"
-                              placeholder="Email pochtangizni kiriting" required field rounded-s-none
+                              placeholder="Email pochtangizni kiriting" required rounded-s-none field
                             >
                           </div>
                         </div>
@@ -150,7 +156,7 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                             </span>
                             <input
                               v-model="loginState.password" type="password" placeholder="Parolingizni kiriting..."
-                              required field rounded-s-none
+                              required rounded-s-none field
                             >
                           </div>
                         </div>
@@ -187,7 +193,7 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                             </span>
                             <input
                               v-model="registerState.name" type="text" autocomplete="name"
-                              placeholder="To'liq ismingizni kiriting" required field rounded-s-none
+                              placeholder="To'liq ismingizni kiriting" required rounded-s-none field
                             >
                           </div>
                         </div>
@@ -199,7 +205,7 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                             </span>
                             <input
                               v-model="registerState.email" type="email" autocomplete="email"
-                              placeholder="Email pochtangizni kiriting" required field rounded-s-none
+                              placeholder="Email pochtangizni kiriting" required rounded-s-none field
                             >
                           </div>
                         </div>
@@ -210,17 +216,17 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                               <div i-carbon-gender-male />
                             </span>
                             <HeadlessRadioGroup v-model="registerState.gender" w-full>
-                              <HeadlessRadioGroupOption v-slot="{ checked }" value="male">
-                                <div field flex items-center justify-between :class="{ 'border-green': checked }" rounded-s-none>
-                                  Erkak <div v-if="checked" rounded-full bg-green p-0.3>
-                                    <div i-carbon-checkmark />
+                              <HeadlessRadioGroupOption v-slot="{ checked }" value="male" cursor-pointer>
+                                <div :class="{ 'border-green': checked }" flex items-center justify-between rounded-s-none field>
+                                  Erkak <div v-if="checked" rounded-full bg-green p-0.4>
+                                    <div i-carbon-checkmark text-xs />
                                   </div>
                                 </div>
                               </HeadlessRadioGroupOption>
-                              <HeadlessRadioGroupOption v-slot="{ checked }" value="female">
-                                <div field flex items-center justify-between :class="{ 'border-green': checked }" rounded-s-none>
-                                  Ayol <div v-if="checked" rounded-full bg-green p-0.3>
-                                    <div i-carbon-checkmark />
+                              <HeadlessRadioGroupOption v-slot="{ checked }" value="female" cursor-pointer>
+                                <div :class="{ 'border-green': checked }" flex items-center justify-between rounded-s-none field>
+                                  Ayol <div v-if="checked" rounded-full bg-green p-0.4>
+                                    <div i-carbon-checkmark text-xs />
                                   </div>
                                 </div>
                               </HeadlessRadioGroupOption>
@@ -235,7 +241,7 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                             </span>
                             <input
                               v-model="registerState.password.password" type="password"
-                              placeholder="Parolni kiriting" required field rounded-s-none
+                              placeholder="Parolni kiriting" required rounded-s-none field
                             >
                           </div>
                         </div>
@@ -247,7 +253,7 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                             </span>
                             <input
                               v-model="registerState.password.confirm" type="password"
-                              placeholder="Parolni qayta kiriting" required field rounded-s-none
+                              placeholder="Parolni qayta kiriting" required rounded-s-none field
                             >
                           </div>
                         </div>
@@ -293,7 +299,7 @@ async function logInWithOAuth(provider: 'google' | 'facebook') {
                     <div i-logos-google-icon inline-block />
                   </button>
                   <button
-                    iconic-btn disabled title="Xozircha ushbu yo'l bilan kira olmaysiz"
+                    disabled iconic-btn title="Xozircha ushbu yo'l bilan kira olmaysiz"
                     @click="logInWithOAuth('facebook')"
                   >
                     <span sr-only>Facebook orqali kirish</span>
