@@ -46,6 +46,7 @@ export default defineNuxtConfig({
 
   image: {
     provider: 'netlify',
+    domains: ['imovi-uz.netlify.app'],
   },
 
   css: [
