@@ -13,7 +13,7 @@ async function searchData() {
       isLoading.value = true
       const data = await $fetch('/api/search', {
         params: {
-          q: q.value,
+          q: q.value.trim(),
           limit: 3,
         },
       })

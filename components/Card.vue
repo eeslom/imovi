@@ -7,13 +7,13 @@ defineProps<{
 </script>
 
 <template>
-  <li relative w-full overflow-hidden rounded bg-light-gray>
-    <NuxtLink :to="`/watch/${item.id}`" h-full w-full>
+  <li relative w-full overflow-hidden rounded bg-light-gray :title="item.title">
+    <NuxtLink :to="`/watch/${item.id}`" contents h-full w-full>
       <div z-100 w-full overflow-hidden>
-        <NuxtImg h-80 format="webp" w-full object-cover quality="80" :src="item.poster_path" :alt="item.title" />
+        <NuxtImg format="webp" h-65 w-full object-cover lg:h-80 sm:h-70 quality="80" :src="item.poster_path" :alt="item.title" />
       </div>
-      <div p-3 text-center>
-        <h3 line-clamp-2 text-sm>
+      <div w-full p-2 text-center sm:p-2.5>
+        <h3 text-sm>
           {{ item.title }}
         </h3>
       </div>
