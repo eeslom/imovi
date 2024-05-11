@@ -23,7 +23,16 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="prose" p-4>
-    <LazyContentDoc />
+  <main class="prose" my-10 max-w-full rounded bg-dark-gray>
+    <div py-5>
+      <div>
+        <H3>
+          {{ title }}
+        </H3>
+      </div>
+      <div mt-4>
+        <LazyContentDoc px-10 />
+      </div>
+    </div>
   </main>
 </template>

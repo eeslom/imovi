@@ -1,30 +1,25 @@
 <script setup lang="ts">
+import H3 from './H3.vue'
+
 const { data: films } = await useFetch('/api/movies/random')
 </script>
 
 <template>
-  <div>
+  <div mt-4>
     <div>
-      <h3>Tasodifiy filmlar</h3>
+      <H3 text-lg>
+        Tasodifiy filmlar
+      </H3>
     </div>
-    <div>
+    <div mt-1>
       <Swiper
         :slides-per-view="1"
-        :pagination="{ clickable: true }" :modules="[SwiperPagination, SwiperA11y]" :style="{ '--swiper-pagination-bullet': '#fff' }"
+        :pagination="{ clickable: true }" :modules="[SwiperPagination, SwiperA11y]" :style="{ '--swiper-pagination-bullet-inactive-color': 'white', '--swiper-pagination-bullet-inactive-opacity': '1', '--swiper-theme-color': 'rgb(13 148 136)' }"
       >
         <SwiperSlide v-for="film in films" :key="film.id">
-          <NuxtImg :src="film.poster_path" :alt="film.title" h-85 />
+          <Card :item="film" />
         </SwiperSlide>
       </Swiper>
     </div>
-    awdawd
   </div>
 </template>
-
-<style>
-:root {
-  --swiper-theme-color: rgb(13 148 136);
-  --swiper-pagination-bullet-inactive-opacity: 1;
-  --swiper-pagination-bullet-inactive-color: white;
-}
-</style>

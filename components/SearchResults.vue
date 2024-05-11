@@ -2,7 +2,7 @@
 import type { Database } from '~/types/database.types'
 
 defineProps<{
-  results: any[]
+  results: Database['public']['Tables']['movies']['Row'][]
 }>()
 
 const searchStore = useSearchStore()

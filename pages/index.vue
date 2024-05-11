@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const { data: movies } = await useFetch('/api/movies')
 const { data: genres } = await useFetch('/api/genres')
+const { data: movies } = await useFetch('/api/movies')
 
 const breakpoints = {
   320: {

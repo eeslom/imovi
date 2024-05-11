@@ -55,9 +55,7 @@ async function signUp() {
         password: registerState.password.password,
         options: {
           data: {
-            avatar_url: '',
             name: registerState.name,
-            favorites: [],
             gender: registerState.gender,
           },
         },

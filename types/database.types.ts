@@ -70,8 +70,11 @@ export interface Database {
           runtime: number
           title: string
           video: string
+          trailer: string | null
           video_provider: Database['public']['Enums']['video_provider']
           year: number
+          views: number
+          age_restricted: Database['public']['Enums']['age_restricted']
         }
         Insert: {
           backdrop_path: string
@@ -81,8 +84,10 @@ export interface Database {
           region: string
           runtime: number
           title: string
+          trailer: string | null
           video: string
           year: number
+          age_restricted: Database['public']['Enums']['age_restricted']
         }
         Update: {
           backdrop_path?: string
@@ -92,9 +97,11 @@ export interface Database {
           region?: string
           runtime?: number
           title?: string
+          trailer?: string
           video?: string
           video_provider?: Database['public']['Enums']['video_provider']
           year?: number
+          age_restricted?: Database['public']['Enums']['age_restricted']
         }
         Relationships: []
       }
@@ -107,6 +114,7 @@ export interface Database {
     }
     Enums: {
       video_provider: 'mover' | 'imovi'
+      age_restricted: 0 | 6 | 12 | 16 | 18
     }
     CompositeTypes: {
       [_ in never]: never

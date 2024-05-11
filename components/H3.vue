@@ -1,10 +1,11 @@
 <script setup lang="ts">
 defineProps<{
-  content: string
-  color: string
+  color?: string
 }>()
 </script>
 
 <template>
-  <h3>{{ content }}</h3>
+  <h3 m0 border-s-3 border-green p0 pl-3 font-semibold uppercase>
+    <slot />
+  </h3>
 </template>
