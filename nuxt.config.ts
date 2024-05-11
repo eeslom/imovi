@@ -137,7 +137,7 @@ export default defineNuxtConfig({
       ],
       noscript: [
         {
-          innerHTML: `<div><img src="https://mc.yandex.ru/watch/97252556" style="position:absolute; left:-9999px;" alt="" /></div>`,
+          innerHTML: `<div><img src="https://mc.yandex.ru/watch/${process.env.YANDEX_METRIKA_ID}" style="position:absolute; left:-9999px;" alt="" /></div>`,
         },
       ],
     },
