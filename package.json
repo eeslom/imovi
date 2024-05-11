@@ -29,7 +29,6 @@
     "@pinia/nuxt": "^0.5.1",
     "@unocss/eslint-config": "^0.59.4",
     "@unocss/nuxt": "^0.59.4",
-    "@vercel/analytics": "^1.2.2",
     "@vite-pwa/nuxt": "^0.6.0",
     "@vueuse/nuxt": "^10.9.0",
     "consola": "^3.2.3",
