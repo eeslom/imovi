@@ -23,7 +23,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="prose" my-10 max-w-full rounded bg-dark-gray>
+  <main class="prose" my-5 max-w-full rounded bg-dark-gray sm:my-10>
     <div py-5>
       <div>
         <H3>
@@ -36,3 +36,16 @@ useSeoMeta({
     </div>
   </main>
 </template>
+
+<style>
+table {
+  border-collapse: collapse;
+}
+
+td,
+th,
+tr {
+  border: 1px solid gray;
+  padding: 8px;
+}
+</style>

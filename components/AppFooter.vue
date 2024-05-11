@@ -25,7 +25,7 @@
         <span />
       </div>
     </footer>
-    <div mx-auto max-w-7xl w-full p-4 text-center text-balance text-xs text-gray>
+    <div max-w-8xl mx-auto w-full p-4 text-center text-balance text-xs text-gray>
       © {{ new Date().getFullYear() }} - Imovi.uz <br>
       Barcha huquqlar himoyalangan. Filmlarga bo'lgan huquq ularning mualliflariga tegishli. Barcha filmlar faqat ma'lumot olish uchun mo'ljallangan. Foydalanuvchilar joylashtirgan noqonuniy materiallar uchun ma'muriyat javobgar emas! Har qanday film mualliflik huquqi egasining iltimosiga binoan olib tashlanadi.
     </div>

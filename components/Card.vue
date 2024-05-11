@@ -13,7 +13,7 @@ defineProps<{
         <NuxtImg h-80 format="webp" w-full object-cover quality="80" :src="item.poster_path" :alt="item.title" />
       </div>
       <div p-3 text-center>
-        <h3 sm:text-md line-clamp-2 text-sm>
+        <h3 line-clamp-2 text-sm>
           {{ item.title }}
         </h3>
       </div>
