@@ -101,7 +101,7 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          src: 'https://www.googletagmanager.com/gtag/js?id=G-YE7Z7J1X62',
+          src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`,
           async: true,
         },
         {
@@ -109,7 +109,7 @@ export default defineNuxtConfig({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-YE7Z7J1X62');
+            gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}');
           `,
           type: 'text/javascript',
         },
@@ -125,7 +125,7 @@ export default defineNuxtConfig({
             k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
             (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
         
-            ym(97252556, "init", {
+            ym(${process.env.YANDEX_METRIKA_ID}, "init", {
                 clickmap:true,
                 trackLinks:true,
                 accurateTrackBounce:true,
