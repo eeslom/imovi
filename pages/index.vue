@@ -28,7 +28,7 @@ const breakpoints = {
 </script>
 
 <template>
-  <div p-4>
+  <div>
     <Swiper :breakpoints="breakpoints" space-between="10" :css-mode="true" mb-4>
       <SwiperSlide v-for="genre in genres" :key="genre.id" text-center capitalize>
         <NuxtLink :to="`/genre/${genre.id}`" block rounded bg-light-gray px-4 py-2>

@@ -14,7 +14,7 @@
           </div>
         </div>
         <ContentNavigation v-slot="{ navigation }">
-          <ul v-for="link in navigation" :key="link._path" flex flex-wrap justify-center gap-5>
+          <ul v-for="link in navigation" :key="link._path" flex flex-wrap items-center justify-center gap-5>
             <li v-for="childLink in link.children" :key="childLink._path">
               <NuxtLink :to="childLink._path" border-1 rounded px-4 py-1 text-xs icon-btn hover:border-green sm:text-sm>
                 {{ childLink.title }}
