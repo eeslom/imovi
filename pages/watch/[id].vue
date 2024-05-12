@@ -4,6 +4,14 @@ const route = useRoute()
 const { id } = route.params as { id: number }
 
 const { data: item } = useFetch(`/api/movies/${id}`)
+
+useHead({
+  title: item.value?.title,
+})
+
+useSeoMeta({
+  title: item.value?.title,
+})
 </script>
 
 <template>
