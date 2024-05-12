@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     'nuxt-headlessui',
     '@nuxt/content',
     '@nuxt/image',
+    '@nuxtjs/seo',
     '@nuxtjs/sitemap',
     'nuxt-swiper',
   ],
@@ -33,6 +34,7 @@ export default defineNuxtConfig({
   },
 
   site: {
+    name: 'Imovi',
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://imovi.uz',
   },
 
@@ -64,6 +66,7 @@ export default defineNuxtConfig({
     },
     prerender: {
       crawlLinks: false,
+      routes: ['/', '/page/*', '/watch/*', '/genre/*', '/movies/*'],
     },
   },
 
