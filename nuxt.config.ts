@@ -66,7 +66,7 @@ export default defineNuxtConfig({
     },
     prerender: {
       crawlLinks: false,
-      routes: ['/', '/page/**', '/watch/**', '/genre/**', '/movies/**'],
+      routes: ['/'],
     },
   },
 
