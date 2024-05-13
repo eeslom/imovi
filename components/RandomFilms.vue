@@ -1,22 +1,37 @@
 <script setup lang="ts">
-import H3 from './H3.vue'
-
 const { data: films } = await useFetch('/api/movies/random')
+
+const breakpoints = {
+  0: {
+    slidesPerView: 1,
+  },
+  400: {
+    slidesPerView: 2,
+    spaceBetween: 10,
+  },
+  640: {
+    slidesPerView: 3,
+    spaceBetween: 10,
+  },
+  1024: {
+    slidesPerView: 1,
+  },
+}
 </script>
 
 <template>
-  <div mt-4>
+  <div mt-12 pt-4>
     <div>
-      <H3 text-lg>
+      <TheTitle text-lg>
         Tasodifiy filmlar
-      </H3>
+      </TheTitle>
     </div>
-    <div mt-1>
+    <div mt-2 rounded bg-light-gray p-5 sm:p-3>
       <Swiper
-        :slides-per-view="1"
+        :breakpoints="breakpoints"
         :pagination="{ clickable: true }" :modules="[SwiperPagination, SwiperA11y]" :style="{ '--swiper-pagination-bullet-inactive-color': 'white', '--swiper-pagination-bullet-inactive-opacity': '1', '--swiper-theme-color': 'rgb(13 148 136)' }"
       >
-        <SwiperSlide v-for="film in films" :key="film.id">
+        <SwiperSlide v-for="film in films" :key="film.id" mb-10 lg:mb-10 sm:mb-0>
           <Card :item="film" />
         </SwiperSlide>
       </Swiper>

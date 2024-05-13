@@ -8,7 +8,7 @@ const navigation = ref<{ name: string, to: string }[]>([
   },
   {
     name: 'Multfilmlar',
-    to: '/genre/3',
+    to: '/movies/genres/3',
   },
   {
     name: 'Kino yangliklari',

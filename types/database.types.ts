@@ -113,7 +113,7 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      video_provider: 'mover' | 'imovi'
+      video_provider: 'mover' | 'imovi' | 'ok'
       age_restricted: 0 | 6 | 12 | 16 | 18
     }
     CompositeTypes: {

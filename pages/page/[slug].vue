@@ -26,9 +26,9 @@ useSeoMeta({
   <main class="prose" my-5 max-w-full rounded bg-dark-gray sm:my-10>
     <div py-5>
       <div>
-        <H3>
+        <TheTitle>
           {{ title }}
-        </H3>
+        </TheTitle>
       </div>
       <div mt-4>
         <LazyContentDoc px-10 />

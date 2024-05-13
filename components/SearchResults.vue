@@ -7,12 +7,14 @@ defineProps<{
 
 const searchStore = useSearchStore()
 
-const supabase = useSupabaseClient<Database>()
-
 async function getGenreName(genre_id: number) {
-  const { data } = await supabase.from('genres').select('*').eq('id', genre_id).single()
+  try {
+    const genre = await $fetch(`/api/genres/${genre_id}`)
 
-  return data
+    return genre?.name
+  }
+  catch (error) {
+  }
 }
 </script>
 
@@ -30,14 +32,16 @@ async function getGenreName(genre_id: number) {
                     {{ item.title }}
                   </span>
                 </div>
-                <div>
+                <div space-x-2>
                   <span>
                     {{ item.year }}
                   </span>
-                  /
-                  <span v-for="genre in item.genres" :key="genre">
-                    {{ getGenreName(genre) }}
-                  </span>
+                  <span>/</span>
+                  <div inline-block space-x-2>
+                    <span v-for="genre in item.genres" :key="genre">
+                      {{ getGenreName(genre) }}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
