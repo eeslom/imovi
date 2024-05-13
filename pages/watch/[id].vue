@@ -23,12 +23,12 @@ useSeoMeta({
     <HeadlessTabGroup as="div" mt-5>
       <HeadlessTabList>
         <HeadlessTab v-slot="{ selected }" as="template">
-          <button rounded-t px-4 py-2 text-xs font-semibold uppercase outline-none :class="[selected ? 'bg-light-gray' : 'bg-dark-gray']">
+          <button rounded-t px-4 py-2 text-sm font-semibold uppercase outline-none :class="[selected ? 'bg-light-gray' : 'bg-dark-gray']">
             onlayn ko'rish
           </button>
         </HeadlessTab>
         <HeadlessTab v-if="item.trailer" v-slot="{ selected }" as="template">
-          <button rounded-t px-4 py-2 text-xs font-semibold uppercase outline-none :class="[selected ? 'bg-light-gray' : 'bg-dark-gray']">
+          <button rounded-t px-4 py-2 text-sm font-semibold uppercase outline-none :class="[selected ? 'bg-light-gray' : 'bg-dark-gray']">
             treylerini ko'rish
           </button>
         </HeadlessTab>
