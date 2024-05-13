@@ -57,7 +57,7 @@ defineProps<{
 
 <style scoped>
 .list__item {
-  @apply flex items-center gap-2 px-4 py-2 bg-slate-gray rounded;
+  @apply flex items-center gap-2 px-4 py-2 bg-slate-gray rounded bg-op-60 shadow shadow-slate-gray;
 }
 
 .backdrop::after {
