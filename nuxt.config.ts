@@ -47,7 +47,7 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: ['imovi-uz.netlify.app', 'imovi-uz.vercel.app'],
+    domains: ['https://www.imovi.uz'],
   },
 
   css: [
