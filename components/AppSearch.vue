@@ -42,10 +42,10 @@ watch(() => searchStore.isOpen, (val) => {
   <div v-if="!searchStore.isOpen" inset-0 flex items-center justify-center>
     <button
       type="button"
-      rounded-md px-4 py-2 text-white font-medium focus:outline-none
+      flex items-center justify-center rounded-md px-4 py-2 text-white font-medium focus:outline-none
       @click="searchStore.open"
     >
-      <div i-carbon-search />
+      <div i-carbon-search text-lg aria-hidden="true" />
     </button>
   </div>
   <HeadlessTransitionRoot appear :show="searchStore.isOpen" as="template">

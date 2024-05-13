@@ -52,7 +52,6 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
-    '~/assets/css/style.css',
   ],
 
   headlessui: {

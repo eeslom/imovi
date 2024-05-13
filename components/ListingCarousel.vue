@@ -8,7 +8,7 @@ defineProps<{
 
 const breakpoints = {
   0: {
-    slidesPerView: 0,
+    slidesPerView: 2,
     spaceBetween: 10,
   },
   320: {
@@ -29,7 +29,7 @@ const breakpoints = {
         {{ title }}
       </TheTitle>
     </div>
-    <Swiper :breakpoints="breakpoints" :loop="true" :navigation="{ enabled: true }" :modules="[SwiperNavigation]">
+    <Swiper :breakpoints="breakpoints" :navigation="{ enabled: true }" :modules="[SwiperNavigation]">
       <SwiperSlide v-for="item in items" :key="item.id">
         <Card :item="item" />
       </SwiperSlide>

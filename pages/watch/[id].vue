@@ -19,11 +19,8 @@ useSeoMeta({
     <Head>
       <Meta v-if="item" name="keywords" :content="`${item.title.split(' ').join(', ')}, kino, serial, multfilm, imovi, anime, animelar, multfilmlar, seriallar, filmlar, ko'rish, tas-ix, iptv, uzbek, o'zbek, tilida`" />
     </Head>
-    <TheHero :item="item" />
-    <TheTitle text-xl>
-      {{ item.title }}
-    </TheTitle>
-    <HeadlessTabGroup as="div" mt-4>
+    <TheDetails :item="item" />
+    <HeadlessTabGroup as="div" mt-5>
       <HeadlessTabList>
         <HeadlessTab v-slot="{ selected }" as="template">
           <button rounded-t px-4 py-2 text-xs font-semibold uppercase outline-none :class="[selected ? 'bg-light-gray' : 'bg-dark-gray']">

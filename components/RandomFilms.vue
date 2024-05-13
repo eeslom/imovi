@@ -14,6 +14,10 @@ const breakpoints = {
     spaceBetween: 10,
   },
   1024: {
+    slidesPerView: 3,
+    spaceBetween: 20,
+  },
+  1280: {
     slidesPerView: 1,
   },
 }
@@ -31,7 +35,7 @@ const breakpoints = {
         :breakpoints="breakpoints"
         :pagination="{ clickable: true }" :modules="[SwiperPagination, SwiperA11y]" :style="{ '--swiper-pagination-bullet-inactive-color': 'white', '--swiper-pagination-bullet-inactive-opacity': '1', '--swiper-theme-color': 'rgb(13 148 136)' }"
       >
-        <SwiperSlide v-for="film in films" :key="film.id" mb-10 lg:mb-10 sm:mb-0>
+        <SwiperSlide v-for="film in films" :key="film.id" mb-8 lg:mb-8 sm:mb-0>
           <Card :item="film" />
         </SwiperSlide>
       </Swiper>

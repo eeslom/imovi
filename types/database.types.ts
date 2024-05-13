@@ -64,7 +64,6 @@ export interface Database {
           genres: number[]
           id: number
           likes: number
-          overview: string
           poster_path: string
           region: string
           runtime: number
@@ -79,7 +78,6 @@ export interface Database {
         Insert: {
           backdrop_path: string
           genres: number[]
-          overview: string
           poster_path: string
           region: string
           runtime: number
@@ -92,7 +90,6 @@ export interface Database {
         Update: {
           backdrop_path?: string
           genres?: number[]
-          overview?: string
           poster_path?: string
           region?: string
           runtime?: number
