@@ -8,7 +8,7 @@ const { data: hindis } = await useAsyncData('hindis', () => $fetch('/api/movies/
 <template>
   <div>
     <ListingCarousel title="Eng ko'p ko'rilganlar" view-all-url="/" :items="movies" />
-    <ListingCarousel title="Hind kinolari" view-all-url="/movies/genres/3" :items="hindis" />
+    <ListingCarousel title="Hind kinolari" view-all-url="/movies/country/Hindiston" :items="hindis" />
     <ListingCarousel title="Multfilmlar" view-all-url="/movies/genres/3" :items="cartoons" />
     <ListingCarousel title="Jangari kinolar" view-all-url="/movies/genres/1" :items="actions" />
   </div>
