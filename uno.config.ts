@@ -12,7 +12,7 @@ import {
 export default defineConfig({
   shortcuts: [
     ['btn', 'px-4 py-1 rounded inline-block text-sm bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
-    ['icon-btn', 'inline-block text-xs sm:text-sm cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600'],
+    ['icon-btn', 'inline-flex items-center gap-2 text-xs sm:text-sm cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600'],
     ['iconic-btn', 'w-full flex items-center justify-center text-xs sm:text-sm rounded bg-gray-100 py-2 hover:bg-gray-200 disabled:opacity-50 disabled:bg-gray-300'],
     ['field', 'block w-full appearance-none border-1 border-gray-500 rounded bg-slate-gray px-3 py-2 text-gray-200 shadow-sm focus:border-green sm:text-sm text-xs focus:outline-none focus:ring-green placeholder-gray-400'],
     ['field-add-on', 'inline-flex items-center border-1 border-r-0 border-gray-500 rounded-l bg-slate-gray px-3 text-gray-200 text-xs sm:text-sm'],

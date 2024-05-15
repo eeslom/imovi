@@ -64,7 +64,7 @@ watch(() => searchStore.isOpen, (val) => {
 
       <div fixed inset-0 overflow-y-auto>
         <div
-          flex justify-center p-4 text-center
+          flex justify-center p-3 text-center sm:p-4
         >
           <HeadlessTransitionChild
             as="template"
@@ -79,7 +79,7 @@ watch(() => searchStore.isOpen, (val) => {
               mt-5 max-w-4xl w-full transform overflow-hidden text-left align-middle transition-all
             >
               <div mt-2 w-full>
-                <form flex items-center justify-between gap-5 @submit.prevent="searchData">
+                <form flex items-center justify-between gap-3 sm:gap-5 @submit.prevent="searchData">
                   <div relative w-full flex>
                     <span field-add-on>
                       <div i-carbon-search />

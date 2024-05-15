@@ -11,6 +11,8 @@ useHead({
 
 useSeoMeta({
   title: item.value?.title,
+  ogImage: item.value?.poster_path,
+  ogType: 'video.movie',
 })
 </script>
 

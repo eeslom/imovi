@@ -29,11 +29,14 @@ const breakpoints = {
 
 <template>
   <div mt-7>
-    <div mb-3>
+    <div mb-3 w-full flex items-center justify-between>
       <NuxtLink :to="viewAllUrl">
         <TheTitle text-2xl>
           {{ title }}
         </TheTitle>
+      </NuxtLink>
+      <NuxtLink :to="viewAllUrl" icon-btn>
+        Barchasini ko'rish <div i-carbon-arrow-right inline-block />
       </NuxtLink>
     </div>
     <Swiper :breakpoints="breakpoints" :navigation="{ enabled: true }" :modules="[SwiperNavigation]">
