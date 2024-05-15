@@ -17,5 +17,6 @@ defineProps<{
     <ul v-if="items && items.length" grid grid-cols-2 gap-4 md:grid-cols-4 sm:grid-cols-3>
       <Card v-for="item in items" :key="item.id" :item="item" />
     </ul>
+    <ThePagination />
   </div>
 </template>

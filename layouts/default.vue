@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div mx-auto max-w-6xl px-2 py-1>
+    <div mx-auto max-w-6xl px-2>
       <marquee>
         Sayt vaqtinchalik test rejimida ishlayabdi! Сайт работает во временном тестовом режиме!
       </marquee>
