@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: films } = await useFetch('/api/movies/random')
+const { data: films } = await useAsyncData('films', () => $fetch('/api/movies/random'))
 
 const breakpoints = {
   0: {

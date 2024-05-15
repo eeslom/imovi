@@ -3,7 +3,7 @@ const route = useRoute()
 
 const { id } = route.params as { id: number }
 
-const { data: item } = useFetch(`/api/movies/${id}`)
+const { data: item } = await useAsyncData('item', () => $fetch(`/api/movies/${id}`))
 
 useHead({
   title: item.value?.title,

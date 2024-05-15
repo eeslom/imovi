@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { data: movies } = await useFetch('/api/movies')
-const { data: cartoons } = await useFetch('/api/movies/genres/3')
-const { data: actions } = await useFetch('/api/movies/genres/1')
+const { data: movies } = await useAsyncData('movies', () => $fetch('/api/movies'))
+const { data: cartoons } = await useAsyncData('cartoons', () => $fetch('/api/movies/genres/3'))
+const { data: actions } = await useAsyncData('actions', () => $fetch('/api/movies/genres/1'))
 </script>
 
 <template>
