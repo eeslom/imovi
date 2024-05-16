@@ -10,12 +10,12 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
     '@nuxtjs/supabase',
-    'nuxt-headlessui',
-    '@nuxt/content',
+    'nuxt-swiper',
     '@nuxt/image',
+    'nuxt-headlessui',
     '@nuxtjs/seo',
     '@nuxtjs/sitemap',
-    'nuxt-swiper',
+    '@nuxt/content',
   ],
 
   runtimeConfig: {
@@ -96,6 +96,7 @@ export default defineNuxtConfig({
       ],
       meta: [
         { name: 'yandex-verification', content: 'fb62c84b8401ccc7' },
+        { name: 'msvalidate.01', content: 'A6021B3DA0391ADB979BB8108FDD4049' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: appDescription },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
