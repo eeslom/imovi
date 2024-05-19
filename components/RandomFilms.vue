@@ -5,11 +5,11 @@ const breakpoints = {
   0: {
     slidesPerView: 1,
   },
-  400: {
+  380: {
     slidesPerView: 2,
     spaceBetween: 10,
   },
-  640: {
+  540: {
     slidesPerView: 3,
     spaceBetween: 10,
   },
@@ -19,6 +19,7 @@ const breakpoints = {
   },
   1280: {
     slidesPerView: 1,
+    spaceBetween: 5,
   },
 }
 </script>
@@ -30,7 +31,7 @@ const breakpoints = {
         Tasodifiy filmlar
       </TheTitle>
     </div>
-    <div mt-2 rounded bg-light-gray p-5 sm:p-3>
+    <div mt-2 rounded bg-light-gray p-3 md:p-5 xl:p-3>
       <Swiper
         :breakpoints="breakpoints"
         :pagination="{ clickable: true }" :modules="[SwiperPagination, SwiperA11y]" :style="{ '--swiper-pagination-bullet-inactive-color': 'white', '--swiper-pagination-bullet-inactive-opacity': '1', '--swiper-theme-color': 'rgb(13 148 136)' }"

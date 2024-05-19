@@ -7,11 +7,11 @@ defineProps<{
 
 const searchStore = useSearchStore()
 
-async function getGenreName(genre_id: number) {
-  const genre = await $fetch(`/api/genres/${genre_id}`)
+// async function getGenreName(genre_id: number) {
+//   const genre = await $fetch(`/api/genres/${genre_id}`)
 
-  return genre?.name
-}
+//   return genre?.name
+// }
 </script>
 
 <template>
@@ -35,7 +35,7 @@ async function getGenreName(genre_id: number) {
                   <span>/</span>
                   <div inline-block space-x-2>
                     <span v-for="genre in item.genres" :key="genre">
-                      {{ getGenreName(genre) }}
+                      {{ genre }}
                     </span>
                   </div>
                 </div>

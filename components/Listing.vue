@@ -10,7 +10,7 @@ defineProps<{
 <template>
   <div>
     <div mb-3>
-      <TheTitle text-2xl>
+      <TheTitle text-xl sm:text-2xl>
         {{ title }}
       </TheTitle>
     </div>

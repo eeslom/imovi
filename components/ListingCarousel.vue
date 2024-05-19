@@ -31,11 +31,11 @@ const breakpoints = {
   <div mt-7>
     <div mb-3 w-full flex items-center justify-between>
       <NuxtLink :to="viewAllUrl">
-        <TheTitle text-2xl>
+        <TheTitle text-xl sm:text-2xl>
           {{ title }}
         </TheTitle>
       </NuxtLink>
-      <NuxtLink :to="viewAllUrl" icon-btn>
+      <NuxtLink :to="viewAllUrl" whitespace-nowrap icon-btn>
         Barchasini ko'rish <div i-carbon-arrow-right inline-block />
       </NuxtLink>
     </div>

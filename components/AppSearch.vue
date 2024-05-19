@@ -39,7 +39,7 @@ watch(() => searchStore.isOpen, (val) => {
 </script>
 
 <template>
-  <div v-if="!searchStore.isOpen" inset-0 flex items-center justify-center>
+  <div inset-0 flex items-center justify-center>
     <button
       type="button"
       flex items-center justify-center rounded-md px-4 py-2 text-white font-medium focus:outline-none
