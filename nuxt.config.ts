@@ -18,6 +18,10 @@ export default defineNuxtConfig({
     '@nuxt/content',
   ],
 
+  routeRules: {
+    '/api/**': { cors: true },
+  },
+
   runtimeConfig: {
     public: {
       baseUrl: process.env.NUXT_BASE_URL || 'http://localhost:3000',
