@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
 
   const offset = (page - 1) * pageSize
 
-  const { data } = await supabase.from('movies').select('*').contains('genres', [id]).range(offset, offset + pageSize - 1)
+  const { data } = await supabase.from('movies').select('id, title, poster_path', { count: 'exact' }).contains('genres', [id]).range(offset, offset + pageSize - 1)
 
   return data
 })

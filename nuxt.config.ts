@@ -51,7 +51,7 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: ['https://www.imovi.uz'],
+    domains: ['www.imovi.uz', 'imovi.uz', 'imovi-uz.vercel.app', 'image.tmdb.org', 'i.pinimg.com', 'musicart.xboxlive.com', 'avatars.mds.yandex.net', 'cdn.culture.ru', 'gauokzjbwdzovotccymx.supabase.co'],
   },
 
   css: [
@@ -165,4 +165,6 @@ export default defineNuxtConfig({
       standalone: false,
     },
   },
+
+  compatibilityDate: '2024-11-05',
 })

@@ -3,7 +3,7 @@ const searchStore = useSearchStore()
 
 const q = ref<string>('')
 
-const results = ref<any>()
+const results = ref()
 
 const isLoading = ref<boolean>(false)
 
@@ -17,6 +17,8 @@ async function searchData() {
           limit: 3,
         },
       })
+      console.log(data)
+
       isLoading.value = false
       results.value = data
     }
@@ -95,6 +97,11 @@ watch(() => searchStore.isOpen, (val) => {
                   </button>
                 </form>
                 <SearchResults v-if="results && results.length" :results="results" />
+                <div v-if="results" w-full border-t border-gray-600 rounded-b bg-slate-gray>
+                  <NuxtLink to="/" w-full p-3 sm:p-4>
+                    Barcha natijalarni ko'rish...
+                  </NuxtLink>
+                </div>
               </div>
             </HeadlessDialogPanel>
           </HeadlessTransitionChild>

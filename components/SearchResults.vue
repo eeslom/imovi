@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import type { Database } from '~/types/database.types'
-
 defineProps<{
-  results: Database['public']['Tables']['movies']['Row'][]
+  results: { id: number, poster_path: string, title: string, year: number, genres: number[] }[]
 }>()
 
 const searchStore = useSearchStore()
@@ -16,7 +14,7 @@ const searchStore = useSearchStore()
 
 <template>
   <div mt-4>
-    <ul v-if="results && results.length" w-full overflow-hidden rounded bg-slate-gray divide-y divide-gray-600>
+    <ul v-if="results && results.length" w-full overflow-hidden rounded-t bg-slate-gray divide-y divide-gray-600>
       <li v-for="item in results" :key="item.id" @click="searchStore.close">
         <NuxtLink :to="`/watch/${item.id}`">
           <div flex items-center justify-between p-3 sm:p-4>
