@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   const supabase = await serverSupabaseClient<Database>(event)
   const { year } = event.context.params as { year: string }
 
-  const { data } = await supabase.from('movies').select('*').eq('year', Number.parseInt(year))
+  const { data } = await supabase.from('movies').select('id, title, poster_path').eq('year', Number.parseInt(year))
 
   return data
 })

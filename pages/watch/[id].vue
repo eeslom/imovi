@@ -3,16 +3,22 @@ const route = useRoute()
 
 const { id } = route.params as { id: number }
 
-const { data: item } = await useAsyncData('item', () => $fetch(`/api/movies/${id}`))
+const item = await $fetch(`/api/movies/${id}`)
 
 useHead({
-  title: item.value?.title,
+  title: item?.title,
 })
 
 useSeoMeta({
-  title: item.value?.title,
-  ogImage: item.value?.poster_path,
+  title: item?.title,
+  ogImage: item?.poster_path,
   ogType: 'video.movie',
+})
+
+onBeforeMount(() => {
+  if (!item) {
+    navigateTo('/:all(.*)*')
+  }
 })
 </script>
 

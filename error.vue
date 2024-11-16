@@ -30,8 +30,8 @@ useHead({
             </div>
           </div>
           <div mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6>
-            <button inline-flex items-center gap-2 btn @click="router.back()">
-              <div i-carbon-arrow-left inline-block /> Ortga qaytish
+            <button inline-flex items-center gap-2 btn @click="router.push('/')">
+              <div i-carbon-arrow-left inline-block /> Bosh sahifa
             </button>
           </div>
         </div>

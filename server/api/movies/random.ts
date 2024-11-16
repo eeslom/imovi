@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const { data } = await supabase.from('movies').select('*')
+    const { data } = await supabase.from('movies').select('id, title, poster_path')
 
     const shuffledDocuments = shuffleArray(data).splice(0, 4)
 

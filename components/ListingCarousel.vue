@@ -5,6 +5,7 @@ defineProps<{
   title: string
   viewAllUrl: string
   items: Database['public']['Tables']['movies']['Row'][]
+  posterQuality?: number
 }>()
 
 const breakpoints = {
@@ -41,7 +42,7 @@ const breakpoints = {
     </div>
     <Swiper :breakpoints="breakpoints" :navigation="{ enabled: true }" :modules="[SwiperNavigation]">
       <SwiperSlide v-for="item in items" :key="item.id">
-        <Card :item="item" />
+        <Card :item="item" :poster-quality="posterQuality" />
       </SwiperSlide>
     </Swiper>
   </div>
