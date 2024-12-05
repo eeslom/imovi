@@ -50,5 +50,6 @@ onBeforeMount(() => {
         </HeadlessTabPanel>
       </HeadlessTabPanels>
     </HeadlessTabGroup>
+    <MovieComments :movie-id="Number(id)" />
   </div>
 </template>

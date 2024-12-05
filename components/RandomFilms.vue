@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineProps<{ posterQuality?: number }>()
+
 const { data: films } = await useAsyncData('films', () => $fetch('/api/movies/random'))
 
 const breakpoints = {
@@ -37,7 +39,7 @@ const breakpoints = {
         :pagination="{ clickable: true }" :modules="[SwiperPagination, SwiperA11y]" :style="{ '--swiper-pagination-bullet-inactive-color': 'white', '--swiper-pagination-bullet-inactive-opacity': '1', '--swiper-theme-color': 'rgb(13 148 136)' }"
       >
         <SwiperSlide v-for="film in films" :key="film.id" mb-10 lg:mb-8 sm:mb-10>
-          <Card :item="film" />
+          <Card :item="film" :poster-quality="posterQuality" />
         </SwiperSlide>
       </Swiper>
     </div>

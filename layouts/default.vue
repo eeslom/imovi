@@ -1,17 +1,17 @@
 <template>
   <main>
-    <div mx-auto max-w-6xl px-2>
+    <!-- <div mx-auto max-w-6xl px-2>
       <marquee>
         Sayt vaqtinchalik test rejimida ishlayabdi! Сайт работает во временном тестовом режиме!
       </marquee>
-    </div>
+    </div> -->
     <AppNavbar />
     <div mx-auto max-w-7xl gap-5 px-3 py-4 xl:grid xl:grid-cols-5>
       <div xl:col-span-4>
         <TheGenresList />
         <slot />
       </div>
-      <LazyRandomFilms xl:col-span-1 />
+      <LazyRandomFilms xl:col-span-1 :poster-quality="70" />
     </div>
     <AppFooter />
   </main>

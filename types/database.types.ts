@@ -11,19 +11,23 @@ export interface Database {
     Tables: {
       comments: {
         Row: {
-          id: number
-          created_at: string
           comment: string
+          created_at: string
+          id: number
           movie_id: number
           user_id: string
         }
         Insert: {
           comment: string
+          created_at?: string
+          id?: number
           movie_id: number
           user_id: string
         }
         Update: {
           comment?: string
+          created_at?: string
+          id?: number
           movie_id?: number
           user_id?: string
         }
@@ -35,13 +39,6 @@ export interface Database {
             referencedRelation: 'movies'
             referencedColumns: ['id']
           },
-          {
-            foreignKeyName: 'comments_user_id_fkey'
-            columns: ['user_id']
-            isOneToOne: false
-            referencedRelation: 'users'
-            referencedColumns: ['id']
-          },
         ]
       }
       genres: {
@@ -50,57 +47,69 @@ export interface Database {
           name: string
         }
         Insert: {
+          id?: number
           name: string
         }
         Update: {
+          id?: number
           name?: string
         }
         Relationships: []
       }
       movies: {
         Row: {
-          backdrop_path: string
+          age_restricted: Database['public']['Enums']['Age restricted']
+          backdrop_path: string | null
           created_at: string
           genres: number[]
           id: number
+          is_shown: boolean
           likes: number
           poster_path: string
           region: string
-          runtime: number
+          runtime: number | null
           title: string
-          video: string
           trailer: string | null
-          video_provider: Database['public']['Enums']['video_provider']
-          year: number
+          video: string | null
+          video_provider: Database['public']['Enums']['video_provider'] | null
           views: number
-          age_restricted: Database['public']['Enums']['age_restricted']
-          is_shown: boolean
+          year: number
         }
         Insert: {
-          backdrop_path: string
+          age_restricted: Database['public']['Enums']['Age restricted']
+          backdrop_path?: string | null
+          created_at?: string
           genres: number[]
+          id?: number
+          is_shown?: boolean
+          likes?: number
           poster_path: string
           region: string
-          runtime: number
+          runtime?: number | null
           title: string
-          trailer: string | null
-          video: string
+          trailer?: string | null
+          video?: string | null
+          video_provider?: Database['public']['Enums']['video_provider'] | null
+          views?: number
           year: number
-          age_restricted: Database['public']['Enums']['age_restricted']
         }
         Update: {
-          backdrop_path?: string
+          age_restricted?: Database['public']['Enums']['Age restricted']
+          backdrop_path?: string | null
+          created_at?: string
           genres?: number[]
+          id?: number
+          is_shown?: boolean
+          likes?: number
           poster_path?: string
           region?: string
-          runtime?: number
+          runtime?: number | null
           title?: string
-          trailer?: string
-          video?: string
-          video_provider?: Database['public']['Enums']['video_provider']
+          trailer?: string | null
+          video?: string | null
+          video_provider?: Database['public']['Enums']['video_provider'] | null
+          views?: number
           year?: number
-          age_restricted?: Database['public']['Enums']['age_restricted']
-          is_shown: boolean
         }
         Relationships: []
       }
@@ -112,8 +121,8 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      video_provider: 'mover' | 'imovi' | 'ok' | 'mail'
-      age_restricted: 0 | 6 | 12 | 16 | 18
+      'Age restricted': '0' | '6' | '12' | '16' | '18'
+      'video_provider': 'mover' | 'imovi' | 'ok' | 'mail'
     }
     CompositeTypes: {
       [_ in never]: never
@@ -201,4 +210,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema['Enums']
     ? PublicSchema['Enums'][PublicEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+  | keyof PublicSchema['CompositeTypes']
+  | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes']
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes'][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema['CompositeTypes']
+    ? PublicSchema['CompositeTypes'][PublicCompositeTypeNameOrOptions]
     : never

@@ -17,7 +17,6 @@ async function searchData() {
           limit: 3,
         },
       })
-      console.log(data)
 
       isLoading.value = false
       results.value = data

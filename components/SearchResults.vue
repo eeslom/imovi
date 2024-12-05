@@ -8,7 +8,7 @@ const searchStore = useSearchStore()
 // async function getGenreName(genre_id: number) {
 //   const genre = await $fetch(`/api/genres/${genre_id}`)
 
-//   return genre?.name
+//   console.log(genre)
 // }
 </script>
 
@@ -19,7 +19,10 @@ const searchStore = useSearchStore()
         <NuxtLink :to="`/watch/${item.id}`">
           <div flex items-center justify-between p-3 sm:p-4>
             <div flex items-center gap-5>
-              <NuxtImg :src="item.poster_path" h-20 :alt="item.title" object-cover />
+              <div>
+                <NuxtImg v-if="item.poster_path" :src="item.poster_path" h-20 :alt="item.title" object-cover />
+                <div v-else bg-darkgray h-20 w-10 />
+              </div>
               <div>
                 <div>
                   <span>

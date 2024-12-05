@@ -1,9 +1,25 @@
 <script setup lang="ts">
 import type { Database } from '~/types/database.types'
 
-defineProps<{
+const props = defineProps<{
   item: Database['public']['Tables']['movies']['Row']
 }>()
+
+const genreNames = ref<Record<number, string>>({})
+
+async function fetchGenreName(genre_id: number) {
+  const genre = await $fetch(`/api/genres/${genre_id}`)
+
+  if (genre) {
+    genreNames.value[genre_id] = genre.name.charAt(0).toUpperCase() + genre.name.slice(1)
+  }
+}
+
+onMounted(() => {
+  if (props.item) {
+    props.item.genres.forEach(genre => fetchGenreName(genre))
+  }
+})
 </script>
 
 <template>
@@ -29,9 +45,11 @@ defineProps<{
                 Nomi: <span>{{ item.title }}</span>
               </li>
               <li v-if="item.genres" class="list__item">
-                Janr: <div inline-block font-semibold space-x-2>
-                  <span v-for="genre in item.genres" :key="genre">
-                    <NuxtLink :to="`/movies/genres/${genre}`">{{ genre }}</NuxtLink>
+                Janr:
+                <div inline-block font-semibold space-x-2>
+                  <span v-for="(genre, index) in item.genres" :key="`genre-${genre}`">
+                    <NuxtLink :to="`/movies/genres/${genre}`">{{ genreNames[genre] }}</NuxtLink>
+                    <span v-if="index < item.genres.length - 1">,</span>
                   </span>
                 </div>
               </li>
@@ -80,22 +98,12 @@ defineProps<{
 }
 
 .backdrop::after {
-  background-image: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.1) 50%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 100%);
 }
 
 @media (min-width: 1025px) {
   .backdrop::after {
-    background-image: linear-gradient(
-      to right,
-      #000 0,
-      transparent 50%,
-      transparent 100%
-    );
+    background-image: linear-gradient(to right, #000 0, transparent 50%, transparent 100%);
   }
 }
 </style>
