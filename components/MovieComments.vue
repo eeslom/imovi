@@ -11,6 +11,8 @@ const user = useSupabaseUser()
 const comment = ref('')
 const comments = ref<Database['public']['Tables']['comments']['Row'][]>([])
 const isLoading = ref(false)
+const editingCommentId = ref<number | null>(null)
+const editedComment = ref('')
 
 async function loadComments() {
   const { data } = await supabase
@@ -45,6 +47,57 @@ async function addComment() {
   finally {
     isLoading.value = false
   }
+}
+
+async function deleteComment(commentId: number) {
+  if (!user.value)
+    return
+
+  isLoading.value = true
+
+  try {
+    await supabase
+      .from('comments')
+      .delete()
+      .eq('id', commentId)
+
+    await loadComments()
+  }
+  catch (error) {
+    console.error('Error deleting comment:', error)
+  }
+  finally {
+    isLoading.value = false
+  }
+}
+
+async function editComment(commentId: number) {
+  if (!user.value || !editedComment.value.trim())
+    return
+
+  isLoading.value = true
+
+  try {
+    await supabase
+      .from('comments')
+      .update({ comment: editedComment.value.trim() })
+      .eq('id', commentId)
+
+    editingCommentId.value = null
+    editedComment.value = ''
+    await loadComments()
+  }
+  catch (error) {
+    console.error('Error updating comment:', error)
+  }
+  finally {
+    isLoading.value = false
+  }
+}
+
+function startEditing(comment: Database['public']['Tables']['comments']['Row']) {
+  editingCommentId.value = comment.id
+  editedComment.value = comment.comment
 }
 
 watch(() => props.movieId, () => {
@@ -146,13 +199,53 @@ function getRelativeTime(date: string) {
             <span class="username">Foydalanuvchi</span>
           </div>
           <span class="timestamp">{{ getRelativeTime(item.created_at) }}</span>
+          <div v-if="user && user.id === item.user_id" class="action-buttons">
+            <button
+              v-if="editingCommentId !== item.id"
+              class="edit-btn"
+              @click="startEditing(item)"
+            >
+              Tahrirlash
+            </button>
+            <button
+              class="delete-btn"
+              @click="deleteComment(item.id)"
+            >
+              O'chirish
+            </button>
+          </div>
         </div>
-        <p class="comment-text">
+        <div v-if="editingCommentId === item.id" class="edit-form">
+          <textarea
+            v-model="editedComment"
+            class="comment-input"
+            rows="3"
+            :disabled="isLoading"
+          />
+          <div class="edit-actions">
+            <button
+              class="cancel-btn"
+              :disabled="isLoading"
+              @click="editingCommentId = null"
+            >
+              Bekor qilish
+            </button>
+            <button
+              class="save-btn"
+              :disabled="isLoading || !editedComment.trim()"
+              @click="editComment(item.id)"
+            >
+              <div v-if="isLoading" i-svg-spinners-270-ring mr-2 />
+              Saqlash
+            </button>
+          </div>
+        </div>
+        <p v-else class="comment-text">
           {{ item.comment }}
         </p>
       </div>
     </div>
-    <div v-else-if="!comments.length" class="empty-state mt-5">
+    <div v-else-if="!comments.length" class="empty-state">
       <div i-carbon-chat-off mb-3 text-4xl op-50 />
       <p>Hozircha izohlar yo'q. Birinchi bo'lib izoh qoldiring!</p>
     </div>
@@ -217,5 +310,37 @@ function getRelativeTime(date: string) {
 .empty-state {
   @apply text-center p-8 text-gray-400 bg-slate-gray rounded-lg
     border-1 border-gray-700;
+}
+
+.delete-btn {
+  @apply text-red-500 hover:text-red-700 transition duration-200;
+}
+
+.action-buttons {
+  @apply flex gap-2;
+}
+
+.edit-btn {
+  @apply text-blue-400 hover:text-blue-500 transition duration-200;
+}
+
+.edit-form {
+  @apply mt-2;
+}
+
+.edit-actions {
+  @apply flex justify-end gap-2 mt-2;
+}
+
+.cancel-btn {
+  @apply px-3 py-1 text-sm text-gray-400 hover:text-gray-200
+    transition duration-200;
+}
+
+.save-btn {
+  @apply inline-flex items-center px-3 py-1 bg-blue-500
+    hover:bg-blue-600 rounded-lg text-white text-sm
+    transition duration-200 disabled:opacity-50
+    disabled:cursor-not-allowed;
 }
 </style>
