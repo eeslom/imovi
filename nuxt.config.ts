@@ -1,4 +1,3 @@
-/* eslint-disable node/prefer-global/process */
 import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
@@ -24,22 +23,22 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      baseUrl: process.env.NUXT_BASE_URL || 'http://localhost:3000',
-      publicUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://imovi.uz',
+      baseUrl: import.meta.env.NUXT_BASE_URL || 'http://localhost:3000',
+      publicUrl: import.meta.env.NUXT_PUBLIC_SITE_URL || 'https://imovi.uz',
       supabase: {
-        url: process.env.SUPABASE_URL,
-        key: process.env.SUPABASE_KEY,
+        url: import.meta.env.SUPABASE_URL,
+        key: import.meta.env.SUPABASE_KEY,
       },
       telegramBot: {
-        botToken: process.env.TELEGRAM_BOT_TOKEN,
-        chatId: process.env.TELEGRAM_CHAT_ID,
+        botToken: import.meta.env.TELEGRAM_BOT_TOKEN,
+        chatId: import.meta.env.TELEGRAM_CHAT_ID,
       },
     },
   },
 
   site: {
-    name: 'Imovi',
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://imovi.uz',
+    name: 'Imovi uz',
+    url: import.meta.env.NUXT_PUBLIC_SITE_URL || 'https://imovi.uz',
   },
 
   supabase: {
@@ -70,7 +69,7 @@ export default defineNuxtConfig({
     },
     prerender: {
       crawlLinks: true,
-      routes: ['/'],
+      routes: ['/', '/sitemap.xml'],
     },
   },
 
@@ -91,7 +90,9 @@ export default defineNuxtConfig({
   },
 
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
+    // pageTransition: { name: 'page', mode: 'out-in' },
+    pageTransition: false,
+    layoutTransition: false,
     head: {
       viewport: 'width=device-width,initial-scale=1',
       link: [
@@ -108,7 +109,7 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`,
+          src: `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.GOOGLE_ANALYTICS_ID}`,
           async: true,
         },
         {
@@ -116,7 +117,7 @@ export default defineNuxtConfig({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}');
+            gtag('config', '${import.meta.env.GOOGLE_ANALYTICS_ID}');
           `,
           type: 'text/javascript',
         },
