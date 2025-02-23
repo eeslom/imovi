@@ -51,6 +51,7 @@ export default defineNuxtConfig({
 
   image: {
     domains: ['www.imovi.uz', 'imovi.uz', 'imovi-uz.vercel.app', 'image.tmdb.org', 'i.pinimg.com', 'musicart.xboxlive.com', 'avatars.mds.yandex.net', 'cdn.culture.ru', 'gauokzjbwdzovotccymx.supabase.co'],
+    format: ['webp']
   },
 
   css: [
