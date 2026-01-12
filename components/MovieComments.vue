@@ -148,7 +148,7 @@ function getRelativeTime(date: string) {
 </script>
 
 <template>
-  <div mt-8 class="comments-section">
+  <div mt-8 mb-8 class="comments-section">
     <TheTitle mb-6 text-xl>
       Izohlar {{ comments.length ? `(${comments.length})` : '' }}
     </TheTitle>
@@ -245,7 +245,7 @@ function getRelativeTime(date: string) {
         </p>
       </div>
     </div>
-    <div v-else-if="!comments.length" class="empty-state">
+    <div v-else-if="!comments.length" class="empty-state mt-6">
       <div i-carbon-chat-off mb-3 text-4xl op-50 />
       <p>Hozircha izohlar yo'q. Birinchi bo'lib izoh qoldiring!</p>
     </div>
