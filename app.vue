@@ -23,7 +23,6 @@ useSeoMeta({
 </script>
 
 <template>
-  <VitePwaManifest />
   <NuxtLayout>
     <NuxtLoadingIndicator color="#0D9488" />
     <NuxtPage />

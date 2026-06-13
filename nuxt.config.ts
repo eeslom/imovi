@@ -1,4 +1,4 @@
-import { pwa } from './config/pwa'
+
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@pinia/nuxt',
-    '@vite-pwa/nuxt',
     '@nuxt/eslint',
     '@nuxtjs/supabase',
     'nuxt-swiper',
@@ -62,17 +61,17 @@ export default defineNuxtConfig({
     prefix: 'Headless',
   },
 
-  nitro: {
-    esbuild: {
-      options: {
-        target: 'esnext',
-      },
-    },
-    prerender: {
-      crawlLinks: true,
-      routes: ['/', '/sitemap.xml'],
-    },
-  },
+  // nitro: {
+  //   esbuild: {
+  //     options: {
+  //       target: 'esnext',
+  //     },
+  //   },
+  //   prerender: {
+  //     crawlLinks: true,
+  //     routes: ['/', '/sitemap.xml'],
+  //   },
+  // },
 
   content: {
     highlight: {
@@ -125,8 +124,6 @@ export default defineNuxtConfig({
       ],
     },
   },
-
-  pwa,
 
   devtools: {
     enabled: true,
