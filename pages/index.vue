@@ -7,9 +7,11 @@ const hindis = await $fetch('/api/movies/country/Hindiston')
 
 <template>
   <div>
-    <ListingCarousel title="Eng ko'p ko'rilganlar" view-all-url="/" :items="movies" :poster-quality="60" />
-    <ListingCarousel title="Hind kinolari" view-all-url="/movies/country/Hindiston" :items="hindis" :poster-quality="60" />
-    <ListingCarousel title="Multfilmlar" view-all-url="/movies/genres/3" :items="cartoons" :poster-quality="60" />
-    <ListingCarousel title="Jangari kinolar" view-all-url="/movies/genres/1" :items="actions" :poster-quality="60" />
+    <ClientOnly>
+      <ListingCarousel title="Eng ko'p ko'rilganlar" view-all-url="/" :items="movies" :poster-quality="60" />
+      <ListingCarousel title="Hind kinolari" view-all-url="/movies/country/Hindiston" :items="hindis" :poster-quality="60" />
+      <ListingCarousel title="Multfilmlar" view-all-url="/movies/genres/3" :items="cartoons" :poster-quality="60" />
+      <ListingCarousel title="Jangari kinolar" view-all-url="/movies/genres/1" :items="actions" :poster-quality="60" />
+    </ClientOnly>
   </div>
 </template>
