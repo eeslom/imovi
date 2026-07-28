@@ -4,7 +4,7 @@ const route = useRoute()
 const id = route.params.id
 const page = route.query.page
 
-const { data: items } = await useFetch(`/api/movies/genres/${id}`, {
+const items = await $fetch(`/api/movies/genres/${id}`, {
   query: {
     page,
   },

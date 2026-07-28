@@ -1,13 +1,25 @@
 <script setup lang="ts">
 import { appDescription, appName } from '~/constants'
 
-const { public: { publicUrl } } = useRuntimeConfig()
-
 provideHeadlessUseId(() => useId())
 
 useHead({
   htmlAttrs: { lang: 'uz' },
   title: appName,
+  link: [
+    {
+      rel: 'preconnect',
+      href: 'https://wsrv.nl',
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://v.mover.uz',
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://gauokzjbwdzovotccymx.supabase.co',
+    },
+  ],
 })
 
 useSeoMeta({
@@ -15,7 +27,7 @@ useSeoMeta({
   ogDescription: appDescription,
   ogImage: '/maskable-icon.png',
   ogLocale: 'uz_UZ',
-  ogUrl: publicUrl,
+  ogUrl: 'https://imovi.uz',
   ogLocaleAlternate: ['en_US', 'ru_RU'],
   ogSiteName: 'Imovi',
   ogType: 'website',

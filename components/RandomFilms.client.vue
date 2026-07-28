@@ -33,7 +33,7 @@ const breakpoints = {
         Tasodifiy filmlar
       </TheTitle>
     </div>
-    <div mt-2 rounded bg-light-gray p-3 md:p-5 xl:p-3>
+    <div mt-2 rounded border="~ white/10" p-3 md:p-5 xl:p-3>
       <Swiper
         :breakpoints="breakpoints"
         :pagination="{ clickable: true }" :modules="[SwiperPagination, SwiperA11y]" :style="{ '--swiper-pagination-bullet-inactive-color': 'white', '--swiper-pagination-bullet-inactive-opacity': '1', '--swiper-theme-color': 'rgb(13 148 136)' }"

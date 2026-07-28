@@ -1,5 +1,7 @@
-
+import process from 'node:process'
 import { appDescription } from './constants/index'
+
+const isDev = process.env.NODE_ENV === 'development'
 
 export default defineNuxtConfig({
   modules: [
@@ -17,27 +19,23 @@ export default defineNuxtConfig({
   ],
 
   routeRules: {
-    '/api/**': { cors: true },
+    '/**': isDev ? {} : { cache: { swr: true, maxAge: 120, staleMaxAge: 60, headersOnly: true } },
   },
 
   runtimeConfig: {
-    public: {
-      baseUrl: import.meta.env.NUXT_BASE_URL || 'http://localhost:3000',
-      publicUrl: import.meta.env.NUXT_PUBLIC_SITE_URL || 'https://imovi.uz',
-      supabase: {
-        url: import.meta.env.SUPABASE_URL,
-        key: import.meta.env.SUPABASE_KEY,
-      },
-      telegramBot: {
-        botToken: import.meta.env.TELEGRAM_BOT_TOKEN,
-        chatId: import.meta.env.TELEGRAM_CHAT_ID,
-      },
+    supabase: {
+      url: import.meta.env.SUPABASE_URL || process.env.SUPABASE_URL,
+      key: import.meta.env.SUPABASE_KEY || process.env.SUPABASE_KEY,
+    },
+    telegramBot: {
+      botToken: import.meta.env.TELEGRAM_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN,
+      chatId: import.meta.env.TELEGRAM_CHAT_ID || process.env.TELEGRAM_CHAT_ID,
     },
   },
 
   site: {
     name: 'Imovi uz',
-    url: import.meta.env.NUXT_PUBLIC_SITE_URL || 'https://imovi.uz',
+    url: 'https://imovi.uz',
   },
 
   supabase: {
@@ -49,8 +47,7 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: ['www.imovi.uz', 'imovi.uz', 'imovi-uz.vercel.app', 'image.tmdb.org', 'i.pinimg.com', 'musicart.xboxlive.com', 'avatars.mds.yandex.net', 'cdn.culture.ru', 'gauokzjbwdzovotccymx.supabase.co'],
-    format: ['webp']
+    domains: ['www.imovi.uz', 'imovi.uz', 'imovi-uz.vercel.app', 'wsrv.nl', 'image.tmdb.org', 'i.pinimg.com', 'musicart.xboxlive.com', 'avatars.mds.yandex.net', 'cdn.culture.ru', 'gauokzjbwdzovotccymx.supabase.co'],
   },
 
   css: [
@@ -61,17 +58,16 @@ export default defineNuxtConfig({
     prefix: 'Headless',
   },
 
-  // nitro: {
-  //   esbuild: {
-  //     options: {
-  //       target: 'esnext',
-  //     },
-  //   },
-  //   prerender: {
-  //     crawlLinks: true,
-  //     routes: ['/', '/sitemap.xml'],
-  //   },
-  // },
+  nitro: {
+    esbuild: {
+      options: {
+        target: 'esnext',
+      },
+    },
+    routeRules: {
+      '/**': { isr: false },
+    },
+  },
 
   content: {
     highlight: {
@@ -99,6 +95,7 @@ export default defineNuxtConfig({
         { rel: 'icon', href: '/favicon.svg', sizes: 'any' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+        { rel: 'dns-prefetch', href: 'https://wsrv.nl' },
       ],
       meta: [
         { name: 'yandex-verification', content: 'fb62c84b8401ccc7' },
@@ -109,7 +106,7 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          src: `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.GOOGLE_ANALYTICS_ID}`,
+          src: `https://www.googletagmanager.com/gtag/js?id=G-YE7Z7J1X62`,
           async: true,
         },
         {
@@ -117,7 +114,7 @@ export default defineNuxtConfig({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${import.meta.env.GOOGLE_ANALYTICS_ID}');
+            gtag('config', 'G-YE7Z7J1X62');
           `,
           type: 'text/javascript',
         },
@@ -126,7 +123,7 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: true,
+    enabled: isDev,
   },
 
   features: {

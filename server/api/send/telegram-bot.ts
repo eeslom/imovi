@@ -1,6 +1,9 @@
 export default defineEventHandler(async (event) => {
-  const { botToken, chatId } = useRuntimeConfig(event).public.telegramBot
+  const config = useRuntimeConfig(event)
   const { text } = getQuery(event)
+
+  const botToken = event.context.cloudflare.env.TELEGRAM_BOT_TOKEN || config.telegramBot.botToken
+  const chatId = event.context.cloudflare.env.TELEGRAM_CHAT_ID || config.telegramBot.chatId
 
   try {
     await $fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -12,5 +15,5 @@ export default defineEventHandler(async (event) => {
       },
     })
   }
-  catch (error) { return };
+  catch (e: any) { return };
 })
