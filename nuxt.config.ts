@@ -1,5 +1,4 @@
 import process from 'node:process'
-import { appDescription } from './constants/index'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -16,26 +15,30 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
     '@nuxtjs/sitemap',
     '@nuxt/content',
+    'nuxt-gtag'
   ],
 
   routeRules: {
-    '/**': isDev ? {} : { cache: { swr: true, maxAge: 120, staleMaxAge: 60, headersOnly: true } },
+    '/**': isDev ? {} : { cache: { swr: true, maxAge: 120, staleMaxAge: 60 } },
   },
 
   runtimeConfig: {
     supabase: {
-      url: import.meta.env.SUPABASE_URL || process.env.SUPABASE_URL,
-      key: import.meta.env.SUPABASE_KEY || process.env.SUPABASE_KEY,
+      url: process.env.SUPABASE_URL,
+      key: process.env.SUPABASE_KEY,
     },
     telegramBot: {
-      botToken: import.meta.env.TELEGRAM_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN,
-      chatId: import.meta.env.TELEGRAM_CHAT_ID || process.env.TELEGRAM_CHAT_ID,
+      botToken: process.env.TELEGRAM_BOT_TOKEN,
+      chatId: process.env.TELEGRAM_CHAT_ID,
     },
+    public: {
+      baseUrl: 'https://www.imovi.uz'
+    }
   },
 
   site: {
     name: 'Imovi uz',
-    url: 'https://imovi.uz',
+    url: 'https://www.imovi.uz',
   },
 
   supabase: {
@@ -47,7 +50,7 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: ['www.imovi.uz', 'imovi.uz', 'imovi-uz.vercel.app', 'wsrv.nl', 'image.tmdb.org', 'i.pinimg.com', 'musicart.xboxlive.com', 'avatars.mds.yandex.net', 'cdn.culture.ru', 'gauokzjbwdzovotccymx.supabase.co'],
+    domains: ['www.imovi.uz', 'imovi.uz', 'imovi-9qp.pages.dev', 'wsrv.nl', 'image.tmdb.org', 'i.pinimg.com', 'musicart.xboxlive.com', 'avatars.mds.yandex.net', 'cdn.culture.ru', 'gauokzjbwdzovotccymx.supabase.co'],
   },
 
   css: [
@@ -59,6 +62,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
+    preset: 'cloudflare_pages',
     esbuild: {
       options: {
         target: 'esnext',
@@ -80,15 +84,13 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    payloadExtraction: false,
+    payloadExtraction: true,
     renderJsonPayloads: true,
     typedPages: true,
+    viewTransition: false
   },
 
   app: {
-    // pageTransition: { name: 'page', mode: 'out-in' },
-    pageTransition: false,
-    layoutTransition: false,
     head: {
       viewport: 'width=device-width,initial-scale=1',
       link: [
@@ -100,26 +102,14 @@ export default defineNuxtConfig({
       meta: [
         { name: 'yandex-verification', content: 'fb62c84b8401ccc7' },
         { name: 'msvalidate.01', content: 'A6021B3DA0391ADB979BB8108FDD4049' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: appDescription },
+        
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       ],
-      script: [
-        {
-          src: `https://www.googletagmanager.com/gtag/js?id=G-YE7Z7J1X62`,
-          async: true,
-        },
-        {
-          innerHTML: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-YE7Z7J1X62');
-          `,
-          type: 'text/javascript',
-        },
-      ],
     },
+  },
+
+  gtag: {
+    id: 'G-YE7Z7J1X62'
   },
 
   devtools: {
