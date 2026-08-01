@@ -13,7 +13,15 @@ useHead({
     },
     {
       rel: 'preconnect',
+      href: 'https://image.tmdb.org',
+    },
+    {
+      rel: 'dns-prefetch',
       href: 'https://v.mover.uz',
+    },
+    {
+      rel: 'dns-prefetch',
+      href: 'https://i.mover.uz',
     },
     {
       rel: 'preconnect',
@@ -48,7 +56,7 @@ useSeoMeta({
 html,
 body,
 #__nuxt {
-  height: 100vh;
+  height: 100dvh;
   margin: 0;
   padding: 0;
 }
@@ -56,15 +64,5 @@ body,
 html {
   background: #222;
   color: white;
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
 }
 </style>

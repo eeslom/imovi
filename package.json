@@ -23,7 +23,6 @@
     "@nuxt/eslint": "^0.3.13",
     "@nuxt/image": "^1.8.1",
     "@nuxtjs/seo": "2.0.0-rc.10",
-    "@nuxtjs/sitemap": "^5.3.5",
     "@nuxtjs/supabase": "^1.4.1",
     "@pinia/nuxt": "^0.5.5",
     "@unocss/eslint-config": "^0.59.4",

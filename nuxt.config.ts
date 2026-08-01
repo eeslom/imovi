@@ -13,7 +13,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-headlessui',
     '@nuxtjs/seo',
-    '@nuxtjs/sitemap',
     '@nuxt/content',
     'nuxt-gtag'
   ],
@@ -88,8 +87,8 @@ export default defineNuxtConfig({
     renderJsonPayloads: true,
     typedPages: true,
     viewTransition: false
-  },
-
+  },  
+ 
   app: {
     head: {
       viewport: 'width=device-width,initial-scale=1',
@@ -97,7 +96,6 @@ export default defineNuxtConfig({
         { rel: 'icon', href: '/favicon.svg', sizes: 'any' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-        { rel: 'dns-prefetch', href: 'https://wsrv.nl' },
       ],
       meta: [
         { name: 'yandex-verification', content: 'fb62c84b8401ccc7' },
