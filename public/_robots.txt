@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /api/
-Crawl-delay: 10
-Sitemap: https://c.eeslom.uz/sitemap.xml
-Sitemap: https://c.eeslom.uz/sitemap-alternates.xml
