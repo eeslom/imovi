@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     'nuxt-headlessui',
     '@nuxtjs/seo',
     '@nuxt/content',
-    'nuxt-gtag'
+    'nuxt-gtag',
   ],
 
   routeRules: {
@@ -31,13 +31,13 @@ export default defineNuxtConfig({
       chatId: process.env.TELEGRAM_CHAT_ID,
     },
     public: {
-      baseUrl: 'https://www.imovi.uz'
-    }
+      baseUrl: 'https://imovi.uz',
+    },
   },
 
   site: {
     name: 'Imovi uz',
-    url: 'https://www.imovi.uz',
+    url: 'https://imovi.uz',
   },
 
   supabase: {
@@ -86,9 +86,9 @@ export default defineNuxtConfig({
     payloadExtraction: true,
     renderJsonPayloads: true,
     typedPages: true,
-    viewTransition: false
-  },  
- 
+    viewTransition: false,
+  },
+
   app: {
     head: {
       viewport: 'width=device-width,initial-scale=1',
@@ -100,14 +100,14 @@ export default defineNuxtConfig({
       meta: [
         { name: 'yandex-verification', content: 'fb62c84b8401ccc7' },
         { name: 'msvalidate.01', content: 'A6021B3DA0391ADB979BB8108FDD4049' },
-        
+
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       ],
     },
   },
 
   gtag: {
-    id: 'G-YE7Z7J1X62'
+    id: 'G-YE7Z7J1X62',
   },
 
   devtools: {

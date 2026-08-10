@@ -49,7 +49,7 @@ useSeoMeta({
   ogDescription: appDescription,
   ogImage: '/maskable-icon.png',
   ogLocale: 'uz_UZ',
-  ogUrl: 'https://www.imovi.uz',
+  ogUrl: 'https://imovi.uz',
   ogLocaleAlternate: ['en_US', 'ru_RU'],
   ogSiteName: 'Imovi',
   ogType: 'website',
