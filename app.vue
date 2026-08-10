@@ -30,7 +30,18 @@ useHead({
   ],
   meta: [
     { name: 'description', content: appDescription },
-  ]
+  ],
+  script: [
+    {
+      src: 'https://yandex.ru/ads/system/context.js',
+      async: true,
+    },
+    {
+      'data-page-id': 19738945,
+      'src': 'https://yandex.ru/ads/system/ap-loader.js',
+      'async': true,
+    },
+  ],
 })
 
 useSeoMeta({
